@@ -1,0 +1,1164 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Payment Hold Help</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF0F6;--surf:#fff;--surf2:#F4F6FB;--line:#E2E7F0;--fg:#17202E;--mut:#5B6779;--mut2:#8591A3;--pri:#2F6BFF;--pri-d:#1E52D4;--pri-bg:#EAF0FF;--pri-ink:#fff;--amb:#7F4B00;--amb-bg:#FFF4DD;--amb-line:#F1D493;--grn:#0B7A4B;--grn-bg:#E5F5ED;--red:#B3261E;--red-bg:#FDECEA;--dev:#101726;--shadow:0 1px 2px rgba(20,32,60,.06),0 2px 8px rgba(20,32,60,.05)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0E16;--surf:#151B27;--surf2:#1B2332;--line:#2A3447;--fg:#E8EDF6;--mut:#9DAABF;--mut2:#7D8BA2;--pri:#6C98FF;--pri-d:#93B3FF;--pri-bg:#1A2A4D;--pri-ink:#0A1226;--amb:#F4C16A;--amb-bg:#2B2111;--amb-line:#5A4318;--grn:#5CD39B;--grn-bg:#10281E;--red:#FF8D83;--red-bg:#34171A;--dev:#03050A;--shadow:none;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0E16;--surf:#151B27;--surf2:#1B2332;--line:#2A3447;--fg:#E8EDF6;--mut:#9DAABF;--mut2:#7D8BA2;--pri:#6C98FF;--pri-d:#93B3FF;--pri-bg:#1A2A4D;--pri-ink:#0A1226;--amb:#F4C16A;--amb-bg:#2B2111;--amb-line:#5A4318;--grn:#5CD39B;--grn-bg:#10281E;--red:#FF8D83;--red-bg:#34171A;--dev:#03050A;--shadow:none;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:Inter,"Noto Sans Devanagari",system-ui,sans-serif;font-size:14px;line-height:1.5}
+button,input,textarea,select{font:inherit;color:inherit}
+.page{max-width:1140px;margin:0 auto;padding-block:16px 40px;padding-inline:16px;display:grid;grid-template-columns:minmax(0,408px) minmax(0,1fr);gap:28px;align-items:start}
+.stage{position:sticky;top:12px;min-width:0}
+.proto-label{font-size:11.5px;color:var(--mut);text-align:center;margin-bottom:8px;letter-spacing:.01em}
+.device{width:100%;max-width:400px;height:780px;max-height:calc(100vh - 48px);min-height:600px;margin:0 auto;background:var(--surf);border:7px solid var(--dev);border-radius:34px;overflow:hidden;position:relative;display:flex;flex-direction:column;font-size:15px;line-height:1.45}
+.sb{height:26px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:11.5px;font-weight:600;color:var(--mut);background:var(--surf)}
+#app{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
+.scr{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--surf2)}
+.bar{flex:none;display:flex;align-items:center;gap:4px;padding:6px 12px 6px 8px;background:var(--surf);border-bottom:1px solid var(--line);min-height:56px}
+.bar h1{flex:1;min-width:0;margin:0;font-size:17px;line-height:1.3;font-weight:600}
+.bar.home{padding-left:16px}
+.ib{width:40px;height:40px;border:0;background:none;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:var(--fg);cursor:pointer;flex:none}
+.ib:hover{background:var(--surf2)}
+.body{flex:1;min-height:0;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}.body>*{flex:none}
+.foot{flex:none;padding:12px 16px;background:var(--surf);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.tabs{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:var(--surf);border-top:1px solid var(--line);padding:4px 0 6px}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;font-size:11px;color:var(--mut);cursor:pointer;font-weight:500}
+.tabs button[aria-current=page]{color:var(--pri);font-weight:600}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.tight{padding:12px 16px}
+.card.amb{background:var(--amb-bg);border-color:var(--amb-line)}
+.card.blu{background:var(--pri-bg);border-color:transparent}
+.card.grn{background:var(--grn-bg);border-color:transparent}
+h2{margin:0;font-size:15px;font-weight:600}
+h3{margin:0;font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+p{margin:0}
+.mut{color:var(--mut)}.sm{font-size:13px}.xs{font-size:12px}
+.big{font-size:28px;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.kv{display:flex;justify-content:space-between;gap:12px;font-size:14px;align-items:flex-start}
+.kv>span{color:var(--mut);flex:none}.kv>b{font-weight:500;text-align:right;overflow-wrap:anywhere;min-width:0}
+.hr{height:1px;background:var(--line);margin:2px 0}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;background:var(--surf2);color:var(--mut);white-space:nowrap}
+.chip.amb{background:var(--amb-bg);color:var(--amb)}.chip.grn{background:var(--grn-bg);color:var(--grn)}.chip.blu{background:var(--pri-bg);color:var(--pri)}.chip.red{background:var(--red-bg);color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.btn{min-height:48px;border-radius:10px;border:1px solid var(--line);background:var(--surf);font-weight:600;font-size:15px;padding:10px 16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;text-align:center;line-height:1.3;width:100%}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-ink)}
+.btn.pri:hover{background:var(--pri-d)}
+.btn.out{border-color:var(--pri);color:var(--pri);background:transparent}
+.btn.sm{min-height:40px;font-size:14px;width:auto;padding:8px 14px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.link{border:0;background:none;color:var(--pri);min-height:40px;width:auto;padding:6px 4px}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible,label:focus-within{outline:2px solid var(--pri);outline-offset:2px}
+.alert{display:flex;gap:10px;padding:12px;border-radius:10px;font-size:14px;background:var(--pri-bg);align-items:flex-start}
+.alert>svg{flex:none;margin-top:2px}.alert>div{min-width:0}
+.alert.amb{background:var(--amb-bg);color:var(--amb);border:1px solid var(--amb-line)}
+.alert.red{background:var(--red-bg);color:var(--red)}
+.alert.grn{background:var(--grn-bg);color:var(--grn)}
+.alert b{font-weight:600}
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld label,.lab{font-size:13px;font-weight:500;color:var(--mut)}
+input[type=text],input[type=date],input[type=tel],textarea,select{width:100%;border:1px solid var(--line);background:var(--surf);border-radius:10px;padding:10px 12px;min-height:44px;font-size:15px}
+textarea{resize:vertical;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--surf);width:100%;cursor:pointer;min-height:56px;font-weight:600}
+.opt small{display:block;font-weight:400;color:var(--mut);font-size:13px}
+.opt>span{flex:1;min-width:0}
+.opt.main{border-color:var(--pri);background:var(--pri-bg)}
+.ic{flex:none}
+.li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);text-align:left;background:none;border-inline:0;border-top:0;width:100%;cursor:pointer;min-height:56px}
+.li:last-child{border-bottom:0}
+.li>span{flex:1;min-width:0}.li small{display:block;color:var(--mut);font-size:13px}
+.li .av{width:40px;height:40px;border-radius:10px;background:var(--pri-bg);color:var(--pri);display:flex;align-items:center;justify-content:center;flex:none}
+.av.amb{background:var(--amb-bg);color:var(--amb)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--surf2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px}
+.seg button{border:0;background:none;border-radius:8px;min-height:38px;font-weight:600;color:var(--mut);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--surf);color:var(--fg);box-shadow:var(--shadow)}
+.fl{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.fl button{flex:none;border:1px solid var(--line);background:var(--surf);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;cursor:pointer;min-height:36px}
+.fl button[aria-pressed=true]{background:var(--pri-bg);border-color:var(--pri);color:var(--pri);font-weight:600}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+.lang button{border:0;background:none;padding:4px 10px;font-size:12px;font-weight:600;cursor:pointer;color:var(--mut);min-height:30px}
+.lang button[aria-pressed=true]{background:var(--pri-bg);color:var(--pri)}
+.logo{max-height:22px;max-width:120px;object-fit:contain}
+.brand{font-weight:700;color:var(--pri);font-size:15px;line-height:1.2}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tl li{position:relative;padding:0 0 16px 28px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:8px;top:20px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl .dot{position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;background:var(--grn);color:#fff;display:flex;align-items:center;justify-content:center}
+.tl .dot.now{background:var(--pri);box-shadow:0 0 0 4px var(--pri-bg)}
+.tl .dot.warn{background:var(--amb-line);color:var(--amb)}
+.tl b{font-weight:600;display:block}.tl .when{font-size:12.5px;color:var(--mut)}.tl p{font-size:13.5px;color:var(--mut);margin-top:2px}
+.dl{border:1.5px dashed var(--line);border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:6px;background:transparent}
+.thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid var(--line);flex:none;background:var(--surf2)}
+.ev{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0;padding-bottom:0}
+.ev .top{display:flex;gap:12px;align-items:center}
+.ev .top>div{flex:1;min-width:0}
+.ck{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer}
+.ck input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--pri)}
+details{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:0 16px}
+summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
+details>div{padding-bottom:14px}
+.mini{display:flex;align-items:flex-end;gap:6px;height:64px}
+.mini i{flex:1;background:var(--pri-bg);border-radius:4px 4px 0 0;display:block}
+.mini i.l{background:var(--pri)}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+.tag.obs{background:#E3E7EE;color:#3C4658}.tag.new{background:#DDEBFF;color:#1747B8}.tag.asm{background:#FFE9C2;color:#7A4600}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.obs{background:#2C3547;color:#C9D2E3}:root:not([data-theme="light"]) .tag.new{background:#1D3668;color:#BCD2FF}:root:not([data-theme="light"]) .tag.asm{background:#4A3510;color:#FFD99A}}
+:root[data-theme="dark"] .tag.obs{background:#2C3547;color:#C9D2E3}:root[data-theme="dark"] .tag.new{background:#1D3668;color:#BCD2FF}:root[data-theme="dark"] .tag.asm{background:#4A3510;color:#FFD99A}
+.sheet{position:absolute;inset:0;background:rgba(8,12,20,.5);display:flex;align-items:flex-end;z-index:5}
+.sheet[hidden]{display:none}
+.sheet>div{width:100%;max-height:92%;overflow-y:auto;background:var(--surf);border-radius:18px 18px 0 0;padding:16px;display:flex;flex-direction:column;gap:12px}
+.toast{position:absolute;left:16px;right:16px;bottom:84px;background:#18202E;color:#fff;border-radius:10px;padding:10px 14px;font-size:13.5px;z-index:6}
+.toast[hidden]{display:none}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;display:inline-block;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.rail{min-width:0;display:flex;flex-direction:column;gap:12px}
+.rail .rt{display:flex;gap:6px;flex-wrap:wrap}
+.rail .rt button{border:1px solid var(--line);background:var(--surf);border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;cursor:pointer;min-height:36px}
+.rail .rt button[aria-pressed=true]{background:var(--pri);border-color:var(--pri);color:var(--pri-ink)}
+.rail .pn{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rail h2{font-size:16px}.rail h4{margin:6px 0 0;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.rail ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.rail a{color:var(--pri)}
+.rail .btn{width:auto;min-height:40px;font-size:13.5px;padding:8px 12px}
+.rail .row{display:flex;flex-wrap:wrap;gap:8px}
+.rail .tm{font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.rail .pill{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--surf);text-align:left;width:100%}
+.rail .pill[aria-pressed=true]{border-color:var(--pri);background:var(--pri-bg)}
+.rail .pill b{display:block;font-size:13.5px}.rail .pill small{color:var(--mut)}
+.rail .quote{border-left:3px solid var(--pri);padding:2px 0 2px 12px;font-size:15px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.cmp>div{border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13.5px;background:var(--surf2)}
+.cmp b{display:block;margin-bottom:2px}
+.fine{font-size:12px;color:var(--mut)}
+@media (max-width:920px){.page{grid-template-columns:minmax(0,1fr)}.stage{position:static}}
+@media (max-width:520px){.device{border-width:4px;border-radius:22px;height:760px}.page{padding-inline:12px}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2s}}
+</style>
+<div class="page">
+ <section class="stage" aria-label="Phone prototype">
+  <div class="proto-label">Independent concept prototype · Sample data · No submission is sent</div>
+  <div class="device" id="device"><div class="sb"><span>4:18 PM</span><span>5G · 82%</span></div><div id="app"></div><div id="sheet" class="sheet" hidden></div><div id="toast" class="toast" role="status" hidden></div></div>
+ </section>
+ <aside class="rail" id="rail" aria-label="Presenter panel"></aside>
+</div>
+<script>
+(() => {
+'use strict';
+function luhnOk(s) {
+  if (!/^\d{15}$/.test(s || '')) return false;
+  let sum = 0;
+  for (let i = 0; i < 15; i++) { let d = +s[14 - i]; if (i % 2 === 1) { d *= 2; if (d > 9) d -= 9; } sum += d; }
+  return sum % 10 === 0;
+}
+const SAMPLE_BILL = { invoice_no: 'LMP/2026/1187', date: '2026-10-06', total: 14999, item: '5G smartphone, 8 GB/128 GB', imei: '358206114927313', readable: true, notes: '' };
+const SAMPLE_IMEI = '358206114927313';
+const SAMPLE_WORDS = '6 tarikh ko shaam 7:30 ke aas paas ek customer aaya, 5G phone liya 14,999 ka. UPI se pay kiya, maine bill diya aur counter pe phone de diya. Main usko pehle se nahi jaanta tha.';
+const SAMPLE_WORDS_EN = 'On the 6th, at around 7:30 in the evening, a customer came to my shop and bought a 5G phone for ₹14,999. He paid by UPI, and I gave him a bill and handed the phone over at the counter. I did not know him before.';
+/* ---------- AI (Claude via the artifact runtime, if the viewer allows) ---------- */
+let aiP = null;
+function getAI() {
+  if (!aiP) {
+    try {
+      aiP = (window.claude && typeof window.claude.use === 'function') ? Promise.resolve(window.claude.use('sample')).catch(() => null) : Promise.resolve(null);
+    } catch (e) { aiP = Promise.resolve(null); }
+  }
+  return aiP;
+}
+const BILL_PROMPT = `You are reading a photo of a shop bill (tax invoice) from a small mobile phone shop in India. A UPI payment linked to this sale is on hold, and the shop owner needs the bill's details to support the claim that the sale was genuine.
+Reply with only a JSON object with exactly these keys:
+{"invoice_no": string or null, "date": "YYYY-MM-DD" or null, "total": number or null, "item": string or null, "imei": string or null, "readable": true or false, "notes": string}
+Rules:
+- Copy values exactly as printed. Use null for anything you cannot read clearly. Never guess.
+- Indian bills write dates as DD-MM-YYYY. Convert the date to YYYY-MM-DD.
+- "total" is the final amount payable in rupees, as a plain number without commas or currency symbols.
+- "imei" is the 15-digit IMEI number if one is printed, digits only.
+- "item" is the main product name in a few words.
+- "notes" is one short sentence about anything unclear or unusual, or "" if nothing.`;
+function wordsPrompt(text) {
+  return `A small shop owner in India is submitting evidence to Razorpay compliance because a customer's UPI payment of Rs. 14,999 was put on hold. Below is what the shop owner wants to say, in their own words. It may be in Hindi, Telugu, Hinglish or English.
+
+Rewrite it as one short paragraph of clear, polite, first-person English for a formal letter, in 2 to 4 sentences.
+- Keep every fact they state.
+- Do not add any facts, names, numbers, dates, promises or legal claims that they did not state.
+- Reply with only the paragraph. No quotation marks, no preamble.
+
+Shop owner's words:
+"""
+${text}
+"""`;
+}
+function clip(v, n) { if (v == null) return null; const s = String(v).trim(); return s ? s.slice(0, n) : null; }
+function normalizeBill(r, src) {
+  let total = r.total;
+  if (typeof total === 'string') total = Number(total.replace(/[^\d.]/g, ''));
+  if (typeof total !== 'number' || !isFinite(total)) total = null;
+  let imei = clip(r.imei, 40); if (imei) imei = imei.replace(/\D/g, '') || null;
+  let date = clip(r.date, 20);
+  if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/.exec(date);
+    date = m ? `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}` : date;
+  }
+  return { invoice_no: clip(r.invoice_no, 40), date, total, item: clip(r.item, 60), imei, notes: clip(r.notes, 160) || '', src };
+}
+
+/* ---------- photo check (runs on the device, nothing uploaded) ---------- */
+const BLUR_MIN = 60, DARK_MIN = 45, SIZE_MIN = 400;
+function loadImg(src) { return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+async function checkImage(src) {
+  const im = await loadImg(src);
+  const W = im.naturalWidth, Hh = im.naturalHeight;
+  if (!W || !Hh) return { ok: false, code: 'unreadable' };
+  if (Math.min(W, Hh) < SIZE_MIN) return { ok: false, code: 'small', W, H: Hh };
+  const sc = Math.min(1, 360 / Math.max(W, Hh));
+  const w = Math.max(3, Math.round(W * sc)), h = Math.max(3, Math.round(Hh * sc));
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const x = c.getContext('2d', { willReadFrequently: true });
+  x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
+  x.drawImage(im, 0, 0, w, h);
+  const d = x.getImageData(0, 0, w, h).data;
+  const g = new Float32Array(w * h); let sum = 0;
+  for (let i = 0, j = 0; i < d.length; i += 4, j++) { const v = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]; g[j] = v; sum += v; }
+  const mean = sum / (w * h);
+  if (mean < DARK_MIN) return { ok: false, code: 'dark', mean };
+  let n = 0, s1 = 0, s2 = 0;
+  for (let y = 1; y < h - 1; y++) for (let xx = 1; xx < w - 1; xx++) {
+    const k = y * w + xx; const lap = g[k - w] + g[k + w] + g[k - 1] + g[k + 1] - 4 * g[k];
+    s1 += lap; s2 += lap * lap; n++;
+  }
+  const mu = s1 / n, variance = s2 / n - mu * mu;
+  if (variance < BLUR_MIN) return { ok: false, code: 'blur', variance, mean };
+  return { ok: true, code: 'ok', variance, mean };
+}
+
+/* ---------- sample images, drawn on canvas ---------- */
+const SANS = 'Helvetica, Arial, "Liberation Sans", sans-serif';
+const MONO = '"Courier New", Courier, "Liberation Mono", monospace';
+function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; }
+function rr(x, X, Y, W, Hh, R) { x.beginPath(); x.moveTo(X + R, Y); x.arcTo(X + W, Y, X + W, Y + Hh, R); x.arcTo(X + W, Y + Hh, X, Y + Hh, R); x.arcTo(X, Y + Hh, X, Y, R); x.arcTo(X, Y, X + W, Y, R); x.closePath(); }
+function drawBill() {
+  const W = 600, Hh = 880; const [c, x] = mk(W, Hh);
+  x.fillStyle = '#FBFAF5'; x.fillRect(0, 0, W, Hh);
+  x.fillStyle = '#1E1E1B'; x.strokeStyle = '#3A3A36'; x.lineWidth = 1.5; x.textBaseline = 'alphabetic';
+  const line = (y, dash) => { x.save(); if (dash) x.setLineDash([7, 5]); x.beginPath(); x.moveTo(40, y); x.lineTo(W - 40, y); x.stroke(); x.restore(); };
+  const tx = (s, X, y, f, al) => { x.font = f; x.textAlign = al || 'left'; x.fillText(s, X, y); };
+  let y = 66;
+  tx('LAKSHMI MOBILE POINT', W / 2, y, `bold 31px ${SANS}`, 'center'); y += 30;
+  tx('Shop 14, Hazratganj, Lucknow 226001', W / 2, y, `17px ${SANS}`, 'center'); y += 24;
+  tx('GSTIN 09AAKPL4917M1Z2   Ph 98765 43210', W / 2, y, `17px ${SANS}`, 'center'); y += 20;
+  line(y, true); y += 38;
+  tx('TAX INVOICE', W / 2, y, `bold 23px ${SANS}`, 'center'); y += 36;
+  tx('Invoice No: LMP/2026/1187', 40, y, `18px ${MONO}`); tx('Date: 06-10-2026', W - 40, y, `18px ${MONO}`, 'right'); y += 26;
+  tx('Bill to: Walk-in customer', 40, y, `18px ${MONO}`); tx('Time: 19:43', W - 40, y, `18px ${MONO}`, 'right'); y += 18;
+  line(y); y += 30;
+  tx('Item', 40, y, `bold 18px ${MONO}`); tx('Qty', 420, y, `bold 18px ${MONO}`, 'right'); tx('Amount', W - 40, y, `bold 18px ${MONO}`, 'right'); y += 14;
+  line(y, true); y += 30;
+  tx('5G Smartphone 8GB/128GB', 40, y, `18px ${MONO}`); tx('1', 420, y, `18px ${MONO}`, 'right'); tx('12,711.02', W - 40, y, `18px ${MONO}`, 'right'); y += 25;
+  tx('IMEI: 358206114927313', 40, y, `18px ${MONO}`); y += 25;
+  tx('HSN 8517   Colour: Graphite', 40, y, `16px ${MONO}`); y += 18;
+  line(y, true); y += 30;
+  [['Taxable value', '12,711.02'], ['CGST @ 9%', '1,143.99'], ['SGST @ 9%', '1,143.99']].forEach(([a, b]) => { tx(a, 40, y, `18px ${MONO}`); tx(b, W - 40, y, `18px ${MONO}`, 'right'); y += 26; });
+  y -= 8; x.lineWidth = 2.5; line(y); x.lineWidth = 1.5; y += 36;
+  tx('TOTAL', 40, y, `bold 25px ${MONO}`); tx('Rs. 14,999.00', W - 40, y, `bold 25px ${MONO}`, 'right'); y += 30;
+  tx('Rupees fourteen thousand nine hundred', 40, y, `16px ${MONO}`); y += 22;
+  tx('ninety-nine only', 40, y, `16px ${MONO}`); y += 30;
+  tx('Paid by UPI   UTR 523419887361', 40, y, `18px ${MONO}`); y += 18;
+  line(y, true);
+  const sy = y + 92;
+  x.save(); x.translate(140, sy); x.rotate(-0.2);
+  x.strokeStyle = 'rgba(46,61,143,.78)'; x.fillStyle = 'rgba(46,61,143,.78)';
+  x.lineWidth = 3; x.beginPath(); x.arc(0, 0, 58, 0, Math.PI * 2); x.stroke();
+  x.lineWidth = 1.5; x.beginPath(); x.arc(0, 0, 48, 0, Math.PI * 2); x.stroke();
+  x.textAlign = 'center'; x.font = `bold 22px ${SANS}`; x.fillText('PAID', 0, 8);
+  x.font = `bold 11px ${SANS}`; x.fillText('LAKSHMI MOBILE', 0, -20); x.fillText('06 OCT 2026', 0, 28);
+  x.restore();
+  x.save(); x.strokeStyle = '#1F2A6B'; x.lineWidth = 2.2; x.lineCap = 'round'; x.beginPath();
+  x.moveTo(380, sy + 10); x.bezierCurveTo(395, sy - 30, 410, sy + 30, 425, sy - 5); x.bezierCurveTo(440, sy - 35, 450, sy + 25, 470, sy - 2); x.bezierCurveTo(485, sy - 20, 505, sy + 15, 530, sy - 8);
+  x.stroke(); x.restore();
+  x.fillStyle = '#1E1E1B';
+  tx('for LAKSHMI MOBILE POINT', W - 40, sy + 40, `15px ${SANS}`, 'right');
+  tx('Authorised signatory', W - 40, sy + 60, `14px ${SANS}`, 'right');
+  tx('Goods once sold will not be taken back.', W / 2, Hh - 52, `15px ${SANS}`, 'center');
+  tx('Thank you. Visit again!', W / 2, Hh - 30, `15px ${SANS}`, 'center');
+  return c;
+}
+function blurCanvas(src) {
+  const sw = 46, sh = Math.round(src.height * sw / src.width);
+  const [s, sx] = mk(sw, sh); sx.imageSmoothingEnabled = true; sx.imageSmoothingQuality = 'high'; sx.drawImage(src, 0, 0, sw, sh);
+  const [c, x] = mk(src.width, src.height); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high'; x.drawImage(s, 0, 0, src.width, src.height);
+  return c;
+}
+function drawHandover() {
+  const W = 800, Hh = 600; const [c, x] = mk(W, Hh);
+  let g = x.createLinearGradient(0, 0, 0, Hh); g.addColorStop(0, '#5E655F'); g.addColorStop(1, '#434943'); x.fillStyle = g; x.fillRect(0, 0, W, Hh);
+  const cols = ['#7F8C93', '#A3AA9F', '#6E7A87', '#AFA58F', '#8D8478'];
+  for (let r = 0; r < 3; r++) {
+    const y0 = 46 + r * 92;
+    for (let i = 0; i < 13; i++) { const w = 38 + (i * 7 + r * 5) % 16, h = 46 - ((i + r) % 3) * 7; x.fillStyle = cols[(i + r) % cols.length]; x.fillRect(40 + i * 56, y0 + 62 - h, w, h); }
+    x.fillStyle = '#2E332F'; x.fillRect(30, y0 + 62, W - 60, 9);
+  }
+  const person = (cx, cy, shirt, hair) => {
+    x.fillStyle = shirt; rr(x, cx - 72, cy + 40, 144, 230, 46); x.fill();
+    x.fillStyle = '#C49A78'; x.beginPath(); x.arc(cx, cy, 36, 0, Math.PI * 2); x.fill();
+    x.fillStyle = hair; x.beginPath(); x.arc(cx, cy - 8, 37, Math.PI * 1.02, Math.PI * 1.98); x.fill();
+  };
+  person(250, 262, '#3B4A70', '#1F1B18');
+  person(575, 250, '#7A4E3A', '#2A231E');
+  x.fillStyle = '#8E958F'; x.fillRect(0, 410, W, Hh - 410); x.fillStyle = '#B4BAB4'; x.fillRect(0, 398, W, 16);
+  x.lineCap = 'round'; x.lineWidth = 26;
+  x.strokeStyle = '#3B4A70'; x.beginPath(); x.moveTo(300, 330); x.quadraticCurveTo(350, 372, 392, 372); x.stroke();
+  x.strokeStyle = '#7A4E3A'; x.beginPath(); x.moveTo(525, 322); x.quadraticCurveTo(480, 370, 452, 372); x.stroke();
+  x.fillStyle = '#ECEFEA'; x.fillRect(392, 350, 62, 40); x.strokeStyle = '#B9C0BA'; x.lineWidth = 2; x.strokeRect(392, 350, 62, 40);
+  x.fillStyle = '#C49A78'; [[392, 372], [454, 372]].forEach(([hx, hy]) => { x.beginPath(); x.arc(hx, hy, 13, 0, Math.PI * 2); x.fill(); });
+  const im = x.getImageData(0, 0, W, Hh), d = im.data; let s = 1234567;
+  for (let i = 0; i < d.length; i += 4) {
+    s = (Math.imul(s, 1103515245) + 12345) | 0;
+    const n = (((s >>> 0) / 4294967296) - 0.5) * 30, gray = (d[i] + d[i + 1] + d[i + 2]) / 3;
+    d[i] = d[i] * .6 + gray * .4 + n; d[i + 1] = d[i + 1] * .6 + gray * .4 + n; d[i + 2] = d[i + 2] * .6 + gray * .4 + n;
+  }
+  x.putImageData(im, 0, 0);
+  g = x.createRadialGradient(W / 2, Hh / 2, 200, W / 2, Hh / 2, 520); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.45)'); x.fillStyle = g; x.fillRect(0, 0, W, Hh);
+  x.fillStyle = 'rgba(0,0,0,.55)'; x.fillRect(14, 14, 236, 34); x.fillRect(W - 14 - 300, Hh - 48, 300, 34);
+  x.fillStyle = '#F2F2EE'; x.font = `bold 21px ${MONO}`; x.textBaseline = 'middle'; x.textAlign = 'left';
+  x.fillText('CAM-02  COUNTER', 24, 31); x.fillText('06-10-2026 19:44:12', W - 14 - 290, Hh - 31);
+  x.fillStyle = '#E0473B'; x.beginPath(); x.arc(W - 28, 30, 8, 0, Math.PI * 2); x.fill();
+  return c;
+}
+function wrapText(x, text, maxW) {
+  const words = text.split(' '), lines = []; let cur = '';
+  for (const w of words) { const t = cur ? cur + ' ' + w : w; if (x.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur);
+  return lines;
+}
+function bubble(x, W, side, text, time, y) {
+  x.font = `19px ${SANS}`; const lines = wrapText(x, text, 330);
+  const tw = Math.max(...lines.map(l => x.measureText(l).width));
+  const bw = Math.min(W - 80, Math.max(tw + 28, 120)), bh = lines.length * 25 + 36;
+  const bx = side === 'l' ? 14 : W - 14 - bw;
+  x.fillStyle = side === 'l' ? '#FFFFFF' : '#D7EFD0'; rr(x, bx, y, bw, bh, 12); x.fill();
+  x.fillStyle = '#1C2421'; x.textAlign = 'left'; lines.forEach((l, i) => x.fillText(l, bx + 14, y + 27 + i * 25));
+  x.fillStyle = '#7A8682'; x.font = `12px ${SANS}`; x.textAlign = 'right'; x.fillText(time, bx + bw - 10, y + bh - 9); x.textAlign = 'left';
+  return y + bh;
+}
+function drawChat() {
+  const W = 540, Hh = 960; const [c, x] = mk(W, Hh);
+  x.fillStyle = '#EAE6DF'; x.fillRect(0, 0, W, Hh);
+  x.fillStyle = '#2F4F4A'; x.fillRect(0, 0, W, 92);
+  x.fillStyle = '#C9D6D2'; x.beginPath(); x.arc(52, 46, 24, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#2F4F4A'; x.font = `bold 20px ${SANS}`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('C', 52, 47);
+  x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  x.fillStyle = '#FFFFFF'; x.font = `bold 22px ${SANS}`; x.fillText('Customer', 90, 40);
+  x.fillStyle = '#D5E2DE'; x.font = `17px ${SANS}`; x.fillText('+91', 90, 69);
+  x.fillStyle = '#16302B'; rr(x, 126, 53, 150, 22, 6); x.fill();
+  x.fillStyle = '#D5E2DE'; x.font = `13px ${SANS}`; x.fillText('number hidden', 150, 69);
+  x.fillStyle = '#D9E6EC'; rr(x, W / 2 - 74, 112, 148, 28, 8); x.fill();
+  x.fillStyle = '#44545B'; x.font = `14px ${SANS}`; x.textAlign = 'center'; x.fillText('6 October 2026', W / 2, 131); x.textAlign = 'left';
+  let y = 160;
+  [['l', 'Bhaiya 5G phone 8/128 hai kya? Price?', '18:52'], ['r', 'Haan hai. Rs. 14,999 final. Bill aur warranty milega.', '18:55'], ['l', 'Ok, 7:30 tak aata hoon', '19:02'], ['r', 'Aa jaiye, shop pe hi hoon', '19:03'], ['l', 'Phone mil gaya, thank you', '19:58'], ['r', 'Welcome ji. Koi problem ho to batana.', '20:01']]
+    .forEach(([side, text, time]) => { y = bubble(x, W, side, text, time, y) + 12; });
+  x.fillStyle = '#FFFFFF'; rr(x, 14, Hh - 64, W - 90, 48, 24); x.fill();
+  x.fillStyle = '#8A9490'; x.font = `17px ${SANS}`; x.fillText('Message', 34, Hh - 34);
+  x.fillStyle = '#2F4F4A'; x.beginPath(); x.arc(W - 40, Hh - 40, 24, 0, Math.PI * 2); x.fill();
+  return c;
+}
+const CACHE = {};
+async function sampleAsset(name) {
+  if (CACHE[name]) return CACHE[name];
+  const c = name === 'bill' ? drawBill() : name === 'bill-blur' ? blurCanvas(drawBill()) : name === 'hand' ? drawHandover() : drawChat();
+  const url = c.toDataURL('image/jpeg', 0.88);
+  const blob = await new Promise(r => c.toBlob(b => r(b), 'image/jpeg', 0.88));
+  CACHE[name] = { url, blob };
+  return CACHE[name];
+}
+/* ===== core ===== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const nf = new Intl.NumberFormat('en-IN');
+const inr = n => '₹' + nf.format(n);
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MON_HI = ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
+const L = (en, hi) => (S.lang === 'hi' && hi) ? hi : en;
+const dfmt = (d, t, short) => { const [day, m] = d; return L(`${day} ${MON[m]}${short ? '' : ' 2026'}${t ? ', ' + t : ''}`, `${day} ${MON_HI[m]}${short ? '' : ' 2026'}${t ? ', ' + t : ''}`); };
+const mmss = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const app = $('#app'), sheetEl = $('#sheet'), toastEl = $('#toast');
+
+const ICONS = {
+  home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  pay: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5"/><path d="M12 17h.01"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>', chev: '<path d="M9 5l7 7-7 7"/>', bell: '<path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 21h4"/>',
+  qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v1M14 21h3M21 18v3h-2"/>',
+  link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
+  page: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  alert: '<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+  doc: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/>', camera: '<path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/>', phone: '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  bank: '<path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>', down: '<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',
+  retry: '<path d="M20 11a8 8 0 10-2.3 6"/><path d="M20 4v7h-7"/>', file: '<path d="M6 3h9l4 4v14H6z"/>',
+  up: '<path d="M12 16V5M7 9l5-5 5 5M5 20h14"/>', list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  flag: '<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>', sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>', globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>'
+};
+const icon = (n, s = 20) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n] || ''}</svg>`;
+const spin = () => '<span class="spin" aria-hidden="true"></span>';
+
+/* ===== sample data (all invented) ===== */
+const M = { name: 'Lakshmi Mobile Point', nameHi: 'लक्ष्मी मोबाइल पॉइंट', city: 'Lucknow, Uttar Pradesh', gstin: '09AAKPL4917M1Z2' };
+const H = { amount: 14999, sched: 284560, payId: 'pay_Q7XK2m9LfT1aB3', utr: '523419887361', inv: 'LMP/2026/1187', payer: 'ra•••••@ybl', ncrp: '31209260048817', rcpt: 'FS-2026-0142', ackNo: 'GRV-SAMPLE-0731', otp: '481392',
+  auth: ['Cyber Crime Police Station, Patna', 'साइबर क्राइम पुलिस स्टेशन, पटना'], state: ['Bihar', 'बिहार'] };
+const PAYS = [
+  { id: 'a', t: [[13, 9], '3:58 PM'], a: 1250 }, { id: 'b', t: [[13, 9], '1:21 PM'], a: 649 }, { id: 'c', t: [[13, 9], '11:07 AM'], a: 1000 },
+  { id: 'd', t: [[12, 9], '6:02 PM'], a: 3450 }, { id: 'e', t: [[12, 9], '2:40 PM'], a: 799 }, { id: 'h', t: [[6, 9], '7:42 PM'], a: 14999, held: true }
+];
+const WEEK = [8200, 5400, 6100, 7300, 4900, 4249, 2899];
+
+/* ===== case engine: every branch is its own forward-only list ===== */
+const STAGE = [null,
+  ['Received by Razorpay', 'Razorpay को मिला'], ['Evidence review', 'सबूतों की समीक्षा'], ['Institutional filing confirmed', 'संस्थागत फ़ाइलिंग की पुष्टि'],
+  ['With investigating officer', 'जाँच अधिकारी के पास'], ['Decision or escalation', 'निर्णय या एस्केलेशन'], ['Release instructed', 'रिलीज़ का निर्देश'], ['Hold removed', 'होल्ड हटा'], ['Settlement processed', 'सेटलमेंट हुआ']];
+const st = (s, d, t, ti, de, o) => Object.assign({ st: s, d, t, ti, de }, o || {});
+const DL_FILE = { l: ['Target for filing confirmation', 'फ़ाइलिंग पुष्टि का लक्ष्य'], d: [20, 9], b: ['7 calendar days after Razorpay received your pack on 13 Oct. This is the SOP timeline for institutions; applying it to Razorpay is an assumption.', 'Razorpay को आपका पैक 13 अक्टूबर को मिलने के 7 कैलेंडर दिन बाद। यह संस्थाओं के लिए SOP की समय-सीमा है; Razorpay पर इसे लागू मानना एक अनुमान है।'] };
+const S1 = st(1, [13, 9], '4:16 PM', ['Received by Razorpay', 'Razorpay को मिला'], [`Intake receipt ${H.rcpt}. This is Razorpay's own receipt, not an acknowledgment from the grievance portal.`, `इनटेक रसीद ${H.rcpt}। यह Razorpay की अपनी रसीद है, शिकायत पोर्टल की पावती नहीं।`], { dl: DL_FILE, nx: ['Razorpay reviews your pack. Nothing is needed from you right now.', 'Razorpay आपका पैक देखेगा। अभी आपको कुछ नहीं करना है।'] });
+const S2 = st(2, [14, 9], '11:05 AM', ['Evidence review completed', 'सबूतों की समीक्षा पूरी'], ['Razorpay checked that the pack is complete and matches your payment record. This is not a view on whether the hold is justified.', 'Razorpay ने जाँचा कि पैक पूरा है और आपके पेमेंट रिकॉर्ड से मेल खाता है। यह इस पर राय नहीं है कि होल्ड सही है या नहीं।'], { nx: ['Razorpay confirms filing with the institution. Nothing is needed from you.', 'Razorpay संस्था के साथ फ़ाइलिंग की पुष्टि करेगा। आपको कुछ नहीं करना है।'] });
+const ACK_DE = [`Your grievance was filed in the grievance module. Acknowledgment: ${H.ackNo} (sample). This differs from Razorpay's intake receipt ${H.rcpt}.`, `आपकी शिकायत ग्रीवेंस मॉड्यूल में दर्ज हुई। पावती: ${H.ackNo} (सैंपल)। यह Razorpay की इनटेक रसीद ${H.rcpt} से अलग है।`];
+const io = (d, b) => ({ l: ["Investigating officer's decision due", 'जाँच अधिकारी का निर्णय देय'], d, b });
+const IO15 = [15, 9];
+const S3 = st(3, [15, 9], '11:30 AM', ['Institutional filing confirmed', 'संस्थागत फ़ाइलिंग की पुष्टि'], ACK_DE, { ack: true, dl: null, nx: ['The investigating officer receives your grievance.', 'जाँच अधिकारी को आपकी शिकायत मिलेगी।'] });
+const S4 = st(4, [15, 9], '3:10 PM', ['Received by the investigating officer', 'जाँच अधिकारी को मिली'], ['The officer has your grievance. The 15-day decision clock runs from this receipt, not from the first alert.', 'अधिकारी के पास आपकी शिकायत है। 15 दिन की घड़ी इस प्राप्ति से चलती है, पहले अलर्ट से नहीं।'], { dl: io([30, 9], ['15 calendar days after the officer received the grievance on 15 Oct. An earlier decision is possible.', 'अधिकारी को शिकायत 15 अक्टूबर को मिलने के 15 कैलेंडर दिन बाद। इससे पहले भी निर्णय आ सकता है।']), nx: ['Waiting for the investigating officer. Nothing is needed from you.', 'जाँच अधिकारी के निर्णय की प्रतीक्षा। आपको कुछ नहीं करना है।'] });
+const RM = (d, t, o) => [
+  st(6, d, t, ['Release instructed', 'रिलीज़ का निर्देश'], ['Release has been instructed. Razorpay now processes the hold removal.', 'रिलीज़ का निर्देश दिया गया। अब Razorpay होल्ड हटाने की प्रक्रिया करेगा।'], { dl: null, nx: ['Razorpay removes the hold.', 'Razorpay होल्ड हटाएगा।'] }),
+  st(7, o.rm[0], o.rm[1], ['Hold removed', 'होल्ड हटा'], [`The hold on ${inr(H.amount)} was removed.`, `${inr(H.amount)} पर लगा होल्ड हटा दिया गया।`], { rem: 1, nx: ['The amount is added to a settlement.', 'राशि सेटलमेंट में जुड़ेगी।'] }),
+  st(8, o.pay[0], o.pay[1], ['Settlement processed', 'सेटलमेंट हुआ'], [`${inr(H.amount)} was processed in a settlement. Bank arrival time depends on your bank.`, `${inr(H.amount)} सेटलमेंट में प्रोसेस हुए। बैंक में आने का समय आपके बैंक पर निर्भर है।`], { pay: 1, end: 1, nx: ['Case closed.', 'मामला बंद।'] })];
+const BR = {
+  release: [S1, S2, S3, S4,
+    st(5, [22, 9], '2:50 PM', ['Officer decision: release directed', 'अधिकारी का निर्णय: रिलीज़'], ['Decided before the 30 Oct deadline. An early decision is valid.', '30 अक्टूबर की समय-सीमा से पहले निर्णय हुआ। जल्दी निर्णय मान्य है।'], { dl: null, nx: ['Release instruction follows.', 'अब रिलीज़ का निर्देश आएगा।'] }),
+    ...RM([22, 9], '3:30 PM', { rm: [[23, 9], '11:00 AM'], pay: [[23, 9], '11:20 AM'] })],
+  nodec: [S1, S2, S3, S4,
+    st(5, [30, 9], '11:59 PM', ['15-day window ended with no decision', '15 दिन में कोई निर्णय नहीं'], ['No decision was recorded by the 30 Oct deadline.', '30 अक्टूबर की समय-सीमा तक कोई निर्णय दर्ज नहीं हुआ।'], { dl: null, nx: ['The grievance is escalated automatically.', 'शिकायत अपने-आप एस्केलेट होगी।'] }),
+    st(5, [31, 9], '9:00 AM', ['Escalated to the District Grievance Officer', 'ज़िला ग्रीवेंस अधिकारी को एस्केलेट'], ['Notified automatically under the SOP timeline and recorded on 31 Oct.', 'SOP की समय-सीमा के अनुसार अपने-आप सूचित हुआ और 31 अक्टूबर को दर्ज हुआ।'], { dl: { l: ['District decision due', 'ज़िला निर्णय देय'], d: [15, 10], b: ['15 calendar days after the district notification on 31 Oct.', '31 अक्टूबर की ज़िला सूचना के 15 कैलेंडर दिन बाद।'] }, nx: ['Waiting for the district decision. Nothing is needed from you.', 'ज़िला निर्णय की प्रतीक्षा। आपको कुछ नहीं करना है।'] }),
+    st(5, [9, 10], '1:15 PM', ['District decision: release directed (simulated)', 'ज़िला निर्णय: रिलीज़ (सिमुलेटेड)'], ['A simulated district decision for this demo. Real outcomes vary.', 'इस डेमो के लिए सिमुलेटेड ज़िला निर्णय। असली नतीजे अलग हो सकते हैं।'], { dl: null, nx: ['Under the SOP, the release instruction and portal update are due within two calendar days of this decision. Settlement arrival is a separate step.', 'SOP के अनुसार रिलीज़ का निर्देश और पोर्टल अपडेट इस निर्णय के दो कैलेंडर दिन के भीतर देय है। सेटलमेंट की आमद अलग चरण है।'] }),
+    ...RM([10, 10], '11:00 AM', { rm: [[11, 10], '10:30 AM'], pay: [[11, 10], '11:00 AM'] })],
+  keep: [S1, S2, S3, S4, ...keepHead(), ...reviewTail(true)],
+  upheld: [S1, S2, S3, S4, ...keepHead(), ...reviewTail(false)],
+  more: [S1,
+    st(2, [14, 9], '11:05 AM', ['More evidence needed', 'और सबूत चाहिए'], ['Razorpay asks for a clearer copy of the customer chat or the handover photo. Your original receipt time (13 Oct, 4:16 PM) and receipt number stay the same.', 'Razorpay को ग्राहक की चैट या हैंडओवर फ़ोटो की ज़्यादा साफ़ कॉपी चाहिए। आपकी मूल रसीद का समय (13 अक्टूबर, 4:16 PM) और रसीद नंबर वही रहेंगे।'], { nx: ['Add the requested document. Your original receipt time is kept.', 'माँगा गया दस्तावेज़ जोड़ें। आपकी मूल रसीद का समय बना रहेगा।'] }),
+    st(2, [14, 9], '3:05 PM', ['You sent the requested document', 'आपने माँगा गया दस्तावेज़ भेजा'], ['Added to your existing pack. The 7-day filing target still counts from 13 Oct.', 'आपके मौजूदा पैक में जुड़ा। 7 दिन का फ़ाइलिंग लक्ष्य अब भी 13 अक्टूबर से गिना जाता है।'], { act: 'respond', nx: ['Razorpay finishes the evidence review.', 'Razorpay सबूतों की समीक्षा पूरी करेगा।'] }),
+    st(2, [15, 9], '10:00 AM', ['Evidence review completed', 'सबूतों की समीक्षा पूरी'], ['Simulated review of the added document.', 'जोड़े गए दस्तावेज़ की सिमुलेटेड समीक्षा।'], { nx: S2.nx }),
+    st(3, [16, 9], '12:20 PM', ['Institutional filing confirmed', 'संस्थागत फ़ाइलिंग की पुष्टि'], ACK_DE, { ack: true, dl: null, nx: S3.nx }),
+    st(4, [16, 9], '4:00 PM', ['Received by the investigating officer', 'जाँच अधिकारी को मिली'], S4.de, { dl: io([31, 9], ['15 calendar days after the officer received the grievance on 16 Oct.', 'अधिकारी को शिकायत 16 अक्टूबर को मिलने के 15 कैलेंडर दिन बाद।']), nx: S4.nx }),
+    st(5, [26, 9], '2:00 PM', ['Officer decision: release directed', 'अधिकारी का निर्णय: रिलीज़'], ['Decided before the 31 Oct deadline.', '31 अक्टूबर की समय-सीमा से पहले निर्णय हुआ।'], { dl: null, nx: ['Release instruction follows.', 'अब रिलीज़ का निर्देश आएगा।'] }),
+    ...RM([26, 9], '3:15 PM', { rm: [[27, 9], '10:45 AM'], pay: [[27, 9], '11:10 AM'] })]
+};
+function keepHead() {
+  return [
+    st(5, [24, 9], '2:10 PM', ['Officer decision: hold continues', 'अधिकारी का निर्णय: होल्ड जारी'], ['Reason recorded (sample): the investigation is ongoing and more records are needed from the customer side. Only the hold on this payment continues.', 'दर्ज कारण (सैंपल): जाँच जारी है और ग्राहक पक्ष से और रिकॉर्ड चाहिए। केवल इसी पेमेंट पर होल्ड जारी है।'], { dl: null, nx: ['You will receive the reasons by SMS or email.', 'आपको कारण SMS या ईमेल से मिलेंगे।'] }),
+    st(5, [24, 9], '2:40 PM', ['You received the decision and reasons', 'आपको निर्णय और कारण मिले'], ['Sent by SMS and email (simulated). Your 15-day window to request a review starts today.', 'SMS और ईमेल से भेजा गया (सिमुलेटेड)। समीक्षा माँगने की आपकी 15 दिन की अवधि आज से शुरू।'], { dl: { l: ['Last day to request review', 'समीक्षा माँगने की अंतिम तारीख'], d: [8, 10], b: ['15 calendar days after you received the decision on 24 Oct.', '24 अक्टूबर को निर्णय मिलने के 15 कैलेंडर दिन बाद।'] }, nx: ['You can request a review, or leave the decision as it is.', 'आप समीक्षा माँग सकते हैं, या निर्णय जैसा है वैसा छोड़ सकते हैं।'] })];
+}
+function reviewTail(ok) {
+  const t = [
+    st(5, [28, 9], '10:20 AM', ['Review requested', 'समीक्षा का अनुरोध'], ['You asked the District Grievance Officer to review the decision.', 'आपने ज़िला ग्रीवेंस अधिकारी से निर्णय की समीक्षा माँगी।'], { act: 'review', dl: null, nx: ['The district office receives your request.', 'ज़िला कार्यालय को आपका अनुरोध मिलेगा।'] }),
+    st(5, [29, 9], '9:00 AM', ['Review received by the district office', 'समीक्षा ज़िला कार्यालय को मिली'], ['Recorded as received on 29 Oct.', '29 अक्टूबर को प्राप्त दर्ज।'], { dl: { l: ['Review decision due', 'समीक्षा निर्णय देय'], d: [13, 10], b: ['15 calendar days after the district office received your request on 29 Oct.', 'ज़िला कार्यालय को अनुरोध 29 अक्टूबर को मिलने के 15 कैलेंडर दिन बाद।'] }, nx: ['Waiting for the review decision. Nothing is needed from you.', 'समीक्षा निर्णय की प्रतीक्षा। आपको कुछ नहीं करना है।'] })];
+  if (ok) return [...t,
+    st(5, [10, 10], '4:00 PM', ['Review decision: release directed (simulated)', 'समीक्षा निर्णय: रिलीज़ (सिमुलेटेड)'], ['A simulated review outcome. A review can also leave the hold in place.', 'सिमुलेटेड समीक्षा नतीजा। समीक्षा में होल्ड जारी भी रह सकता है।'], { dl: null, nx: ['Under the SOP, the release instruction and portal update are due within two calendar days of this decision. Settlement arrival is a separate step.', 'SOP के अनुसार रिलीज़ का निर्देश और पोर्टल अपडेट इस निर्णय के दो कैलेंडर दिन के भीतर देय है। सेटलमेंट की आमद अलग चरण है।'] }),
+    ...RM([12, 10], '12:30 PM', { rm: [[12, 10], '4:45 PM'], pay: [[13, 10], '10:30 AM'] })];
+  return [...t,
+    st(5, [10, 10], '4:00 PM', ['Review decision: hold continues (simulated)', 'समीक्षा निर्णय: होल्ड जारी (सिमुलेटेड)'], ['The district officer kept the hold and recorded reasons. The demo ends here.', 'ज़िला अधिकारी ने होल्ड जारी रखा और कारण दर्ज किए। इस डेमो में मामला यहीं बंद होता है।'], { dl: null, end: 1, gs: ['Review completed · Hold continues', 'समीक्षा पूरी · होल्ड जारी'], nx: ['Review completed. The hold continues. Support can explain your options.', 'समीक्षा पूरी। होल्ड जारी है। सपोर्ट आपके विकल्प समझा सकता है।'] })];
+}
+const BRN = {
+  release: ['Ordinary release', 'Officer decides before the 15-day deadline'], nodec: ['No decision in 15 days', 'Escalates to the district, later simulated decision'],
+  keep: ['Officer keeps the hold (review allowed)', 'Merchant requests review, hold removed'], upheld: ['Officer keeps the hold (review declined)', 'Merchant requests review, hold continues'],
+  more: ['More evidence needed', 'Only before institutional filing']
+};
+
+/* ===== state ===== */
+const initS = () => ({
+  lang: 'en', tab: 'home', stack: [], pay: 'payments', pfilt: 'all', sfilt: 'all', ann: false, rail: 'demo',
+  t0: 0, tEnd: 0, ev: {}, bill: null, billState: '', ask: '', askW: '', words: '', expl: '', explSrc: '', wordsState: '', imei: '', imeiFrom: '',
+  letter: '', letterEdited: false, letterStale: false, ack: false, sheet: null, sub: '', otpErr: '', draftAt: '', errMissing: false,
+  submitted: false, flag: false, branch: 'release', cs: 0, sim: { upfail: false, aioff: false, subfail: false, ackna: false, extna: false },
+  logo: '', bankLetter: '', bankEdited: false, chk: {}, respDoc: null, reviewNote: '', keepScroll: false, otp: '', respondMode: false, hi: { src: '', out: '', state: '', ask: false }
+});
+const S = initS();
+const cur = () => S.stack.length ? S.stack[S.stack.length - 1] : S.tab;
+function go(n) { S.stack.push(n); render(); }
+function back() { S.stack.pop(); render(); }
+function setTab(t) { S.tab = t; S.stack = []; render(); }
+const steps = () => BR[S.branch];
+function cstate() {
+  const all = steps(), done = all.slice(0, S.cs);
+  let hold = 'active', set = 'held', stage = 0, dl = null, ack = false, end = false;
+  done.forEach(s => { stage = Math.max(stage, s.st); if (s.rem) { hold = 'removed'; set = 'awaiting'; } if (s.pay) set = 'processed'; if ('dl' in s) dl = s.dl; if (s.ack) ack = true; if (s.end) end = true; });
+  const last = done[done.length - 1] || null;
+  return { done, hold, set, stage, dl, ack, end, last, next: all[S.cs] || null };
+}
+const released = () => cstate().set === 'processed';
+function resetCase() { S.cs = S.submitted ? 1 : 0; }
+function advance() {
+  if (!S.submitted) return 'Merchant has not submitted yet.';
+  const c = cstate(); if (c.end || !c.next) return 'Case is closed.';
+  if (c.next.act) return 'Waiting for the merchant: ' + (c.next.act === 'review' ? 'Request review' : 'Add requested document');
+  S.cs++; return '';
+}
+function toast(msg) { toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { toastEl.hidden = true; }, 3200); }
+
+/* ===== ai, evidence ===== */
+async function setEvidence(k, url, blob, sample) {
+  const prev = S.ev[k]; if (prev && prev.url && prev.url !== url && prev.url.startsWith('blob:')) { try { URL.revokeObjectURL(prev.url); } catch (e) {} }
+  const it = { url, blob, sample: !!sample, status: 'checking' }; S.ev[k] = it;
+  if (k === 'bill') { S.bill = null; S.billState = ''; S.ask = ''; }
+  markStale(); render(true);
+  await sleep(350);
+  if (S.sim.upfail) { S.sim.upfail = false; it.status = 'upfail'; renderRail(); render(true); return; }
+  try { const r = await checkImage(url); it.status = r.ok ? 'ok' : 'bad'; it.code = r.code; } catch (e) { it.status = 'bad'; it.code = 'unreadable'; }
+  markStale(); render(true);
+}
+async function retryEv(k) { const it = S.ev[k]; if (!it) return; await setEvidence(k, it.url, it.blob, it.sample); }
+function markStale() { S.ack = false; if (S.letterEdited) S.letterStale = true; }
+const okEv = k => !!(S.ev[k] && S.ev[k].status === 'ok');
+const imeiOk = () => luhnOk(S.imei);
+async function readBill() {
+  const it = S.ev.bill; if (!it || it.status !== 'ok') return;
+  S.ask = ''; S.billState = 'reading'; render(true);
+  let r = null, src = 'ai';
+  const ai = S.sim.aioff ? null : await getAI();
+  if (ai && typeof ai.json === 'function' && it.blob) { try { r = await ai.json(BILL_PROMPT, { images: [it.blob], modelTier: 'quick' }); } catch (e) { r = null; } }
+  if (S.ev.bill !== it) return;
+  if (!r || typeof r !== 'object' || Array.isArray(r)) {
+    if (it.sample) { r = SAMPLE_BILL; src = 'sample'; await sleep(500); }
+    else { S.billState = 'error'; render(true); return; }
+  }
+  S.bill = Object.assign({ invoice_no: null, date: null, total: null, item: null, imei: null, notes: '' }, normalizeBill(r, src));
+  S.billState = 'done';
+  if (S.bill.imei && luhnOk(S.bill.imei) && !imeiOk()) { S.imei = S.bill.imei; S.imeiFrom = 'bill'; }
+  markStale(); render(true);
+}
+function manualBill() { S.ask = ''; S.bill = { invoice_no: '', date: '', total: null, item: '', imei: null, notes: '', src: 'manual' }; S.billState = 'done'; render(true); }
+async function makeExplanation() {
+  const txt = (S.words || '').trim(); S.askW = ''; if (!txt) return;
+  S.wordsState = 'busy'; render(true);
+  let out = null, src = 'ai';
+  const ai = S.sim.aioff ? null : await getAI();
+  if (ai) { try { const res = await ai(wordsPrompt(txt), { modelTier: 'quick' }); out = String(res && res.text || '').trim().replace(/^["“]+|["”]+$/g, '').trim() || null; } catch (e) { out = null; } }
+  if (!out) { if (txt === SAMPLE_WORDS) { out = SAMPLE_WORDS_EN; src = 'sample'; } else { S.wordsState = 'error'; render(true); return; } }
+  S.expl = out; S.explSrc = src; S.wordsState = 'done'; markStale(); render(true);
+}
+
+/* ===== letter ===== */
+function enclosures() {
+  const o = [{ ic: 'file', t: ['Razorpay transaction record', 'Razorpay ट्रांज़ैक्शन रिकॉर्ड'], s: ['Added from payment records', 'पेमेंट रिकॉर्ड से जुड़ा'], l: `Razorpay transaction record for payment ${H.payId} (UTR ${H.utr})` }];
+  o.push({ ic: 'lock', t: ['Hold reference', 'होल्ड संदर्भ'], s: [`Police complaint ref. ${H.ncrp}`, `पुलिस शिकायत संदर्भ ${H.ncrp}`], l: `Hold reference from the notice: police complaint ref. ${H.ncrp}, ${H.auth[0]}` });
+  if (okEv('bill')) o.push({ ic: 'doc', t: ['Bill or invoice photo', 'बिल या इनवॉइस की फ़ोटो'], s: [S.bill && S.bill.invoice_no ? 'Invoice ' + S.bill.invoice_no : 'Photo you added', 'आपकी जोड़ी फ़ोटो'], l: `Photo of bill or invoice${S.bill && S.bill.invoice_no ? ' ' + S.bill.invoice_no : ''}` });
+  if (okEv('hand')) o.push({ ic: 'camera', t: ['Handover or CCTV photo', 'हैंडओवर या CCTV फ़ोटो'], s: ['Photo you added', 'आपकी जोड़ी फ़ोटो'], l: 'Handover or CCTV photo from the shop counter' });
+  if (okEv('chat')) o.push({ ic: 'chat', t: ['Customer communication', 'ग्राहक से बातचीत'], s: ['Screenshot you added', 'आपका जोड़ा स्क्रीनशॉट'], l: 'Screenshot of my conversation with the customer' });
+  if (imeiOk()) o.push({ ic: 'phone', t: ['IMEI as entered', 'दर्ज किया IMEI'], s: [S.imei, S.imei], l: `IMEI as entered by me: ${S.imei}` });
+  return o;
+}
+function buildLetter() {
+  const b = S.bill || {};
+  const bits = [b.invoice_no ? `invoice ${b.invoice_no}` : '', b.item || ''].filter(Boolean).join(', ');
+  const encl = enclosures().map((e, i) => `${i + 1}. ${e.l}`).join('\n');
+  return `To,
+The Grievance Officer, Razorpay
+
+Subject: Grievance about the hold on payment ${H.payId} (UTR ${H.utr}), ${inr(H.amount)}
+
+I am the owner of ${M.name}, ${M.city} (GSTIN ${M.gstin}).
+
+A hold has been placed on the above payment, which I understand is linked to police complaint reference ${H.ncrp} (${H.auth[0]}, ${H.state[0]}). I recognise this payment as a sale made at my shop on 6 October 2026${bits ? ' (' + bits + ')' : ''}.
+
+What happened, in my words:
+${(S.expl || '').trim() || '[Please add a short explanation]'}
+
+Enclosed:
+${encl}
+
+I request that Razorpay review the enclosed records and, if satisfied, coordinate my grievance with the investigating authority through the applicable grievance process. I understand that the decision rests with the investigating officer.
+
+I confirm that the details above are accurate to the best of my knowledge. I will provide any further information needed.
+
+Yours faithfully,
+Suresh K.
+${M.name}`;
+}
+function bankLetter() {
+  return `To,
+The Branch Manager, [Bank and branch name]
+
+Subject: Request to review the restriction on my account [account number] and to use your grievance process
+
+I am the owner of ${M.name}, ${M.city}. I received a restriction on my bank account on [date]. I request the branch to:
+1. Tell me in writing which authority asked for the restriction, the reference number, and the amount or accounts covered.
+2. Review whether the restriction can be limited to the disputed amount.
+3. Take my grievance through the bank's grievance route, including the bank's grievance officer, and tell me the status.
+
+One transaction that may be involved is a Razorpay payment of ${inr(H.amount)} on 6 October 2026 (payment ${H.payId}, UTR ${H.utr}), a sale at my shop with invoice ${H.inv}. The Razorpay payment record is attached. Other transactions or complaints may also be relevant, and I will provide whatever else you need.
+
+Yours faithfully,
+Suresh K.
+Contact: [your mobile number]`;
+}
+
+/* ===== small views ===== */
+const A = k => S.ann ? `<span class="tag ${k}">${{ obs: 'Observed Razorpay UI', new: 'Proposed addition', asm: 'Assumption to confirm' }[k]}</span>` : '';
+const chip = (kind, ic, txt) => `<span class="chip ${kind}">${ic ? icon(ic, 14) : ''}${txt}</span>`;
+const alertBox = (kind, ic, html) => `<div class="alert ${kind}" role="${kind === 'red' ? 'alert' : 'note'}">${icon(ic, 18)}<div>${html}</div></div>`;
+const kv = (l, v) => `<div class="kv"><span>${l}</span><b>${v}</b></div>`;
+function langToggle() { return `<div class="lang" role="group" aria-label="Language"><button data-act="lang" data-v="en" aria-pressed="${S.lang === 'en'}">EN</button><button data-act="lang" data-v="hi" aria-pressed="${S.lang === 'hi'}" lang="hi">हिं</button></div>`; }
+function bar(title, o) { o = o || {}; return `<header class="bar${o.home ? ' home' : ''}">${o.home ? '' : `<button class="ib" data-act="back" aria-label="${L('Back', 'पीछे')}">${icon('back', 22)}</button>`}<h1>${title}</h1>${o.right || ''}${langToggle()}</header>`; }
+function tabsBar() {
+  const T = [['home', 'home', ['Home', 'होम']], ['payments', 'pay', ['Payments', 'पेमेंट्स']], ['products', 'grid', ['Products', 'प्रोडक्ट्स']], ['support', 'help', ['Support', 'सपोर्ट']], ['account', 'user', ['Account', 'अकाउंट']]];
+  return `<nav class="tabs" aria-label="Main">${T.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" ${S.tab === k ? 'aria-current="page"' : ''}>${icon(ic, 22)}${L(l[0], l[1])}</button>`).join('')}</nav>`;
+}
+const scr = (inner, o) => `<div class="scr">${inner}${(o && o.tabs) ? tabsBar() : ''}</div>`;
+const holdLbl = c => c.hold === 'removed' ? chip('grn', 'check', L('Hold removed', 'होल्ड हटा')) : chip('amb', 'lock', L('Settlement on hold', 'सेटलमेंट होल्ड पर'));
+const setChip = c => c.set === 'processed' ? chip('grn', 'check', L('Settlement processed', 'सेटलमेंट हुआ')) : c.set === 'awaiting' ? chip('blu', 'clock', L('Hold removed · Awaiting settlement', 'होल्ड हटा · सेटलमेंट का इंतज़ार')) : chip('amb', 'lock', L('Settlement on hold', 'सेटलमेंट होल्ड पर'));
+function statusList() {
+  const c = cstate();
+  const g = !S.submitted ? (S.flag ? L('Flagged to compliance', 'कंप्लायंस को फ़्लैग') : S.draftAt ? L('Draft saved', 'ड्राफ़्ट सेव') : L('Not started', 'शुरू नहीं')) : (c.last && c.last.gs ? L(c.last.gs[0], c.last.gs[1]) : L(STAGE[c.stage][0], STAGE[c.stage][1]));
+  return `<div style="display:flex;flex-direction:column;gap:8px">
+    <div class="kv"><span>${L('Payment', 'पेमेंट')}</span><b>${chip('grn', 'check', L('Payment captured', 'पेमेंट कैप्चर हुआ'))}</b></div>
+    <div class="kv"><span>${L('Hold', 'होल्ड')}</span><b>${c.hold === 'removed' ? chip('grn', 'check', L('Hold removed', 'होल्ड हटा')) : chip('amb', 'lock', L('Police-linked hold', 'पुलिस-संबंधित होल्ड'))}</b></div>
+    <div class="kv"><span>${L('Grievance', 'शिकायत')}</span><b>${chip(S.submitted ? 'blu' : '', S.submitted ? 'clock' : '', g)}</b></div>
+    <div class="kv"><span>${L('Settlement', 'सेटलमेंट')}</span><b>${setChip(c)}</b></div></div>`;
+}
+function homeCardInner() {
+  const c = cstate();
+  if (!S.submitted) {
+    if (S.flag) return { k: 'amb', a: L('You flagged this payment', 'आपने इस पेमेंट को फ़्लैग किया'), b: L('Compliance will review. Nothing is refunded from here.', 'कंप्लायंस समीक्षा करेगा। यहाँ से कुछ रिफ़ंड नहीं होता।'), cta: L('Talk to support', 'सपोर्ट से बात करें'), act: 'toSupport' };
+    return { k: 'amb', a: L(`${inr(H.amount)} on hold`, `${inr(H.amount)} होल्ड पर`), b: L('Police-linked restriction on one payment', 'एक पेमेंट पर पुलिस-संबंधित रोक'), cta: L('Get help with this hold', 'इस होल्ड में मदद पाएँ'), act: 'start' };
+  }
+  if (c.set === 'awaiting') return { k: 'blu', a: L('Hold removed', 'होल्ड हटा'), b: L('Awaiting settlement. Bank arrival time depends on your bank.', 'सेटलमेंट का इंतज़ार। बैंक में आने का समय आपके बैंक पर निर्भर है।'), cta: L('Track your grievance', 'अपनी शिकायत ट्रैक करें'), act: 'track' };
+  if (c.end && c.set === 'processed') return { k: 'grn', a: L('Hold removed', 'होल्ड हटा'), b: L(`${inr(H.amount)} was processed in a settlement.`, `${inr(H.amount)} सेटलमेंट में प्रोसेस हुए।`), cta: L('Track your grievance', 'अपनी शिकायत ट्रैक करें'), act: 'track' };
+  if (c.end) return { k: 'amb', a: L('Review decided: hold continues', 'समीक्षा: होल्ड जारी'), b: L('See the summary and your options.', 'सारांश और विकल्प देखें।'), cta: L('Track your grievance', 'अपनी शिकायत ट्रैक करें'), act: 'track' };
+  return { k: 'blu', a: L('Grievance pack submitted', 'शिकायत पैक जमा हुआ'), b: L('View your next step', 'अगला कदम देखें'), cta: L('Track your grievance', 'अपनी शिकायत ट्रैक करें'), act: 'track' };
+}
+/* ===== screens ===== */
+const SCREENS = {};
+function toolBtn(ic, l) { return `<button class="li" data-act="soon"><span class="av">${icon(ic, 20)}</span><span><b>${l}</b></span>${icon('chev', 18)}</button>`; }
+
+SCREENS.home = () => {
+  const c = cstate(), h = homeCardInner(), held = c.hold !== 'removed';
+  const mx = Math.max(...WEEK);
+  return scr(`<header class="bar home">${S.logo ? `<img class="logo" src="${S.logo}" alt="">` : `<span class="brand">Payments for Business</span>`}<span style="flex:1"></span><button class="ib" data-act="soon" aria-label="${L('Notifications', 'सूचनाएँ')}">${icon('bell', 22)}</button>${langToggle()}</header>
+  <div class="body">
+   <div><div class="mut sm">${L('Welcome back', 'वापसी पर स्वागत है')} ${A('obs')}</div><div style="font-size:20px;font-weight:600">${L('Hi, Suresh', 'नमस्ते, सुरेश')}</div><div class="mut sm">${L(M.name, M.nameHi)} · ${M.city.split(',')[0]}</div></div>
+   <div class="card"><h3>${L('Account overview', 'अकाउंट ओवरव्यू')}</h3>
+     <div class="kv"><span>${L('Today', 'आज')}</span><b class="num">${inr(2899)} · ${L('3 payments', '3 पेमेंट')}</b></div>
+     <div class="mini" style="height:48px" aria-hidden="true">${WEEK.map((v, i) => `<i class="${i === 6 ? 'l' : ''}" style="height:${Math.round(v / mx * 100)}%"></i>`).join('')}</div>
+     <div class="kv"><span>${L('Last 7 days', 'पिछले 7 दिन')}</span><b class="num">${inr(WEEK.reduce((a, b) => a + b, 0))}</b></div></div>
+   <div class="card ${h.k}"><div style="display:flex;gap:10px;align-items:center"><span class="av ${h.k === 'amb' ? 'amb' : ''}" style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--surf);color:${h.k === 'amb' ? 'var(--amb)' : h.k === 'grn' ? 'var(--grn)' : 'var(--pri)'}">${icon(h.k === 'grn' ? 'check' : h.k === 'amb' ? 'lock' : 'clock', 20)}</span><div><div style="font-size:17px;font-weight:700" class="num">${h.a}</div><div class="sm">${h.b}</div></div></div>${A('new')}
+     <button class="btn ${h.k === 'amb' ? 'pri' : 'out'}" data-act="${h.act}">${h.cta}</button></div>
+   <div class="card"><h3>${L('Settlement preview', 'सेटलमेंट प्रीव्यू')} ${A('obs')}</h3>
+     <div class="big">${inr(H.sched)}</div><div class="sm mut">${L('Scheduled settlement. Updated 13 Oct 2026, 4:14 PM.', 'निर्धारित सेटलमेंट। अपडेट: 13 अक्टूबर 2026, 4:14 PM।')}</div>
+     <div class="xs mut">${L('A schedule, not your bank balance or a guaranteed arrival.', 'यह शेड्यूल है, बैंक बैलेंस या पक्की आमद नहीं।')}${held ? ' ' + L(`Does not include ${inr(H.amount)} on hold.`, `${inr(H.amount)} (होल्ड पर) शामिल नहीं।`) : ''}</div>
+     <button class="btn link" style="justify-content:flex-start" data-act="toSettle">${L('View settlements', 'सेटलमेंट देखें')} ${icon('chev', 16)}</button></div>
+   <div class="card"><h3>${L('Collect payments', 'पेमेंट लें')} ${A('obs')}</h3>${toolBtn('qr', L('Razorpay QR', 'Razorpay QR'))}${toolBtn('link', L('Payment Links', 'पेमेंट लिंक'))}${toolBtn('page', L('Payment Pages', 'पेमेंट पेज'))}</div>
+  </div>`, { tabs: true });
+};
+
+function payRow(p) {
+  const held = p.held, c = cstate();
+  const chips = held ? `${chip('grn', 'check', L('Payment captured', 'पेमेंट कैप्चर हुआ'))} ${setChip(c)}` : chip('grn', 'check', L('Captured', 'कैप्चर'));
+  return `<button class="li" data-act="${held ? 'payOpen' : 'soon'}"><span class="av ${held && c.hold !== 'removed' ? 'amb' : ''}">${icon('qr', 20)}</span><span><b class="num">${inr(p.a)}</b><small>${dfmt(p.t[0], p.t[1], true)} · Razorpay QR · UPI</small><span class="chips" style="margin-top:6px">${chips}</span></span>${icon('chev', 18)}</button>`;
+}
+SCREENS.payments = () => {
+  const c = cstate();
+  const seg = `<div class="seg" role="group">${[['payments', ['Payments', 'पेमेंट्स']], ['settlements', ['Settlements', 'सेटलमेंट्स']]].map(([k, l]) => `<button data-act="seg" data-v="${k}" aria-pressed="${S.pay === k}">${L(l[0], l[1])}</button>`).join('')}</div>`;
+  let body;
+  if (S.pay === 'payments') {
+    const f = S.pfilt; const list = PAYS.filter(p => f === 'all' || (f === 'hold' && p.held && c.hold !== 'removed'));
+    body = `<div class="fl">${[['all', ['All', 'सभी']], ['hold', ['Settlement on hold', 'सेटलमेंट होल्ड पर']]].map(([k, l]) => `<button data-act="pf" data-v="${k}" aria-pressed="${f === k}">${L(l[0], l[1])}</button>`).join('')}</div>${f === 'hold' ? A('new') : ''}
+      <div class="card tight">${list.length ? list.map(payRow).join('') : `<p class="mut sm" style="padding:12px 0">${L('No payments with a settlement on hold.', 'किसी पेमेंट का सेटलमेंट होल्ड पर नहीं है।')}</p>`}</div>`;
+  } else {
+    const f = S.sfilt, held = c.hold !== 'removed';
+    const rows = [
+      { k: 'sched', t: L('Scheduled settlement', 'निर्धारित सेटलमेंट'), s: L('Updated 13 Oct 2026, 4:14 PM', 'अपडेट: 13 अक्टूबर 2026, 4:14 PM'), a: H.sched, ch: chip('blu', 'clock', L('Scheduled', 'निर्धारित')) },
+      { k: 'done', t: L('Settlement', 'सेटलमेंट'), s: dfmt([12, 9]), a: 41230, ch: chip('grn', 'check', L('Processed', 'हुआ')) },
+      { k: 'done', t: L('Settlement', 'सेटलमेंट'), s: dfmt([11, 9]), a: 36775, ch: chip('grn', 'check', L('Processed', 'हुआ')) }];
+    if (held) rows.splice(1, 0, { k: 'hold', t: L('Held payment', 'होल्ड पर पेमेंट'), s: L('Payment of 6 Oct 2026, 7:42 PM', '6 अक्टूबर 2026, 7:42 PM का पेमेंट'), a: H.amount, ch: chip('amb', 'lock', L('On hold', 'होल्ड पर')), open: 1 });
+    else if (c.set === 'awaiting') rows.splice(1, 0, { k: 'await', t: L('Hold removed', 'होल्ड हटा'), s: L('awaiting settlement', 'सेटलमेंट का इंतज़ार'), a: H.amount, ch: chip('blu', 'clock', L('Awaiting settlement', 'सेटलमेंट का इंतज़ार')), open: 1 });
+    else { const p = steps().find(x => x.pay); rows.splice(1, 0, { k: 'done', t: L('Released from hold', 'होल्ड से रिलीज़'), s: dfmt(p.d, p.t), a: H.amount, ch: chip('grn', 'check', L('Processed', 'हुआ')), open: 1 }); }
+    const shown = rows.filter(r => f === 'all' || (f === 'sched' && r.k === 'sched') || (f === 'done' && r.k === 'done') || (f === 'await' && r.k === 'await') || (f === 'hold' && r.k === 'hold'));
+    body = `<div class="card ${held ? 'amb' : c.set === 'awaiting' ? 'blu' : 'grn'}"><h3>${L('On hold', 'होल्ड पर')} ${A('new')}</h3>
+       ${held ? `<div class="big">${inr(H.amount)}</div><div class="sm">${L('1 payment · police-linked hold. Kept separate from scheduled settlements.', '1 पेमेंट · पुलिस-संबंधित होल्ड। निर्धारित सेटलमेंट से अलग रखा गया।')}</div><div class="chips">${chip('blu', 'clock', L('Grievance: ' + (S.submitted ? STAGE[Math.max(c.stage, 1)][0] : 'not started'), 'शिकायत: ' + (S.submitted ? STAGE[Math.max(c.stage, 1)][1] : 'शुरू नहीं')))}</div>
+       <button class="btn out" data-act="payOpen">${L('View held payment', 'होल्ड वाला पेमेंट देखें')}</button>`
+        : `<div class="sm">${c.set === 'awaiting' ? L(`Hold removed on ${inr(H.amount)}. Awaiting settlement.`, `${inr(H.amount)} पर होल्ड हटा। सेटलमेंट का इंतज़ार।`) : L(`Nothing is on hold. ${inr(H.amount)} was released and processed.`, `कुछ भी होल्ड पर नहीं। ${inr(H.amount)} रिलीज़ होकर प्रोसेस हुए।`)}</div>`}</div>
+      <div class="fl" aria-label="${L('Status filter', 'स्टेटस फ़िल्टर')}">${[['all', ['All', 'सभी']], ['sched', ['Scheduled', 'निर्धारित']], ['done', ['Processed', 'हुआ']], ['hold', ['On hold', 'होल्ड पर']]].map(([k, l]) => `<button data-act="sf" data-v="${k}" aria-pressed="${f === k}">${L(l[0], l[1])}</button>`).join('')}</div>
+      <div class="card tight">${shown.length ? shown.map(r => `<button class="li" data-act="${r.open ? 'payOpen' : 'soon'}"><span class="av ${r.k === 'hold' ? 'amb' : ''}">${icon('bank', 20)}</span><span><b class="num">${inr(r.a)}</b><small>${r.t} · ${r.s}</small><span style="display:block;margin-top:6px">${r.ch}</span></span>${icon('chev', 18)}</button>`).join('') : `<p class="mut sm" style="padding:12px 0">${L('Nothing matches this filter.', 'इस फ़िल्टर से कुछ नहीं मिला।')}</p>`}</div>
+      <p class="fine">${L('Scheduled amounts are not a bank balance or a guaranteed arrival.', 'निर्धारित राशि बैंक बैलेंस या पक्की आमद नहीं है।')}</p>`;
+  }
+  return scr(`<header class="bar home"><h1>${L('Payments', 'पेमेंट्स')}</h1>${langToggle()}</header><div class="body">${seg}${body}</div>`, { tabs: true });
+};
+
+SCREENS.payDetail = () => {
+  const c = cstate();
+  const cta = S.submitted ? `<button class="btn pri" data-act="track">${L('Track your grievance', 'अपनी शिकायत ट्रैक करें')}</button>` : (c.hold === 'removed' ? '' : `<button class="btn pri" data-act="start">${L('Get help with this hold', 'इस होल्ड में मदद पाएँ')}</button>`);
+  return scr(`${bar(L('Payment details', 'पेमेंट विवरण'))}<div class="body">
+    <div class="card"><div class="big">${inr(H.amount)}</div>${statusList()}
+      <div class="hr"></div>
+      ${kv(L('Method', 'तरीका'), 'Razorpay QR · UPI')}${kv(L('Paid', 'भुगतान'), dfmt([6, 9], '7:42 PM'))}${kv(L('Payment ID', 'पेमेंट ID'), H.payId)}${kv('UTR', H.utr)}${kv(L('Your invoice', 'आपका इनवॉइस'), H.inv)}${kv(L('Payer', 'भुगतानकर्ता'), H.payer)}</div>
+    <div class="card ${c.hold === 'removed' ? 'grn' : 'amb'}"><h3>${L('Hold', 'होल्ड')} ${A('new')}</h3>
+      <p>${c.hold === 'removed' ? L('The police-linked hold on this payment was removed.', 'इस पेमेंट पर पुलिस-संबंधित होल्ड हट गया।') : L('Police-linked hold. The payment was captured, but its settlement is on hold.', 'पुलिस-संबंधित होल्ड। पेमेंट कैप्चर हुआ, पर उसका सेटलमेंट होल्ड पर है।')}</p>
+      <button class="btn out" data-act="viewHold">${L('View hold details', 'होल्ड विवरण देखें')}</button>${cta}</div>
+  </div>`, { tabs: true });
+};
+
+SCREENS.hold = () => {
+  const c = cstate();
+  const opts = S.submitted ? `<button class="btn pri" data-act="track">${L('Track your grievance', 'अपनी शिकायत ट्रैक करें')}</button>` : `
+    <h3>${L('What would you like to do?', 'आप क्या करना चाहेंगे?')}</h3>
+    <button class="opt main" data-act="real">${icon('check', 22)}<span>${L('This was a real sale', 'यह असली बिक्री थी')}<small>${L('Add your bill and send a grievance to Razorpay', 'अपना बिल जोड़ें और Razorpay को शिकायत भेजें')}</small></span>${icon('chev', 18)}</button>
+    <button class="opt" data-act="notmine">${icon('flag', 22)}<span>${L("I don't recognise this payment", 'मैं इस पेमेंट को नहीं पहचानता')}<small>${L('Flag it to Razorpay compliance', 'Razorpay कंप्लायंस को फ़्लैग करें')}</small></span>${icon('chev', 18)}</button>
+    <button class="opt" data-act="else">${icon('help', 22)}<span>${L('Something else? Talk to support', 'कुछ और? सपोर्ट से बात करें')}<small>${L('Partial refund, several complaints, or not sure', 'आंशिक रिफ़ंड, कई शिकायतें, या पक्का नहीं')}</small></span>${icon('chev', 18)}</button>`;
+  const notice = S.lang === 'hi'
+    ? `<p>सैंपल नोटिस का हिंदी अनुवाद (सहायता के लिए): ${H.auth[1]}, ${H.state[1]}। संदर्भ ${H.ncrp}। UTR ${H.utr} के विरुद्ध 6 अक्टूबर 2026 को प्राप्त ${inr(H.amount)} जाँच लंबित रहने तक रोकने का अनुरोध है।</p><p class="xs mut" style="margin-top:8px">यह अनुवाद सहायता के लिए है। मूल नोटिस का पाठ ही मान्य है।</p>`
+    : `<p>Notice of restriction. ${H.auth[0]}, ${H.state[0]}. Reference ${H.ncrp}. Under the NCRP-CFCFRMS process, the amount of ${inr(H.amount)} received on 6 October 2026 against UTR ${H.utr} is requested to be held pending investigation.</p><p class="xs mut" style="margin-top:8px">Sample notice written for this prototype. Original text prevails over any translation.</p>`;
+  return scr(`${bar(L('Payment on hold', 'पेमेंट होल्ड पर'))}<div class="body">
+    <div class="card amb"><div class="big">${inr(H.amount)}</div><div>${L('is on hold', 'होल्ड पर है')} ${A('new')}</div>
+      <div class="hr"></div>${kv(L('Linked payment', 'जुड़ा पेमेंट'), `${H.payId}<br><span class="xs mut">${dfmt([6, 9], '7:42 PM')} · Razorpay QR · UPI</span>`)}${kv(L('Authority', 'प्राधिकरण'), L(H.auth[0], H.auth[1]))}${kv(L('State', 'राज्य'), L(H.state[0], H.state[1]))}${kv(L('Police complaint ref.', 'पुलिस शिकायत संदर्भ'), H.ncrp)}${kv(L('Ledger updated', 'लेजर अपडेट'), dfmt([13, 9], '4:14 PM'))}</div>
+    ${alertBox('', 'info', `<b>${L('This payment is linked to a reported fraud investigation. The hold is not a finding that you committed fraud.', 'यह पेमेंट एक रिपोर्ट किए गए फ़्रॉड की जाँच से जुड़ा है। होल्ड का मतलब यह नहीं कि आपने फ़्रॉड किया है।')}</b>`)}
+    ${S.submitted ? statusList() : ''}
+    <details><summary>${L('Original notice', 'मूल नोटिस')}</summary><div>${notice}</div></details>
+    ${opts}
+    ${c.hold === 'removed' ? '' : `<p class="fine">${L('Release is one possible outcome, never a promise.', 'रिलीज़ एक संभावित नतीजा है, वादा नहीं।')}</p>`}
+  </div>`);
+};
+
+SCREENS.flag = () => scr(`${bar(L('Flag this payment', 'इस पेमेंट को फ़्लैग करें'))}<div class="body">
+  <div class="card"><div class="kv"><span>${L('Payment', 'पेमेंट')}</span><b>${inr(H.amount)} · ${H.payId}</b></div>
+   <p>${L("If you don't recognise this payment, tell Razorpay compliance. This is a flag for review, not a grievance. It does not refund, reverse or release the held amount; restoring money is decided by the authority.", 'अगर आप इस पेमेंट को नहीं पहचानते, तो Razorpay कंप्लायंस को बताएँ। यह समीक्षा के लिए फ़्लैग है, शिकायत नहीं। इससे रकम रिफ़ंड, रिवर्स या रिलीज़ नहीं होती; पैसा लौटाना प्राधिकरण तय करता है।')}</p></div>
+  ${S.flag ? alertBox('grn', 'check', `<b>${L('Flag recorded (sample)', 'फ़्लैग दर्ज (सैंपल)')}</b><br>${L('Compliance would review it. Nothing was actually sent.', 'कंप्लायंस इसकी समीक्षा करेगा। असल में कुछ नहीं भेजा गया।')}`) : ''}
+  </div><div class="foot">${S.flag ? `<button class="btn pri" data-act="toSupport">${L('Talk to support', 'सपोर्ट से बात करें')}</button>` : `<button class="btn pri" data-act="doFlag">${L('Flag to compliance', 'कंप्लायंस को फ़्लैग करें')}</button><button class="btn" data-act="back">${L('Cancel', 'रद्द करें')}</button>`}</div>`);
+
+/* ---- documents ---- */
+const BADMSG = {
+  blur: ['This photo looks blurry. Hold the phone steady and retake it.', 'यह फ़ोटो धुंधली लग रही है। फ़ोन स्थिर रखकर दोबारा लें।'],
+  dark: ['This photo is too dark. Move to better light and retake it.', 'यह फ़ोटो बहुत अंधेरी है। बेहतर रोशनी में दोबारा लें।'],
+  small: ['This photo is too small. Retake it closer, at a higher quality.', 'यह फ़ोटो बहुत छोटी है। पास से, बेहतर क्वालिटी में दोबारा लें।'],
+  unreadable: ["This file couldn't be opened as a photo. Choose another.", 'यह फ़ाइल फ़ोटो के रूप में नहीं खुली। दूसरी चुनें।']
+};
+function fileBtn(k, label, primary) { return `<label class="btn sm ${primary ? 'pri' : ''}">${icon('camera', 16)}${label}<input type="file" accept="image/*" class="vh" data-file="${k}"></label>`; }
+function evBlock(k, title, hintEn, hintHi, req) {
+  const it = S.ev[k];
+  let st = '', acts = '', extra = '';
+  if (!it) { st = `<span class="sm mut">${L(hintEn, hintHi)}</span>`; acts = fileBtn(k, L('Add photo', 'फ़ोटो जोड़ें')); }
+  else if (it.status === 'checking') { st = `<span class="sm">${spin()} ${L('Checking photo on your phone…', 'आपके फ़ोन पर फ़ोटो जाँची जा रही है…')}</span>`; }
+  else if (it.status === 'upfail') { st = alertBox('red', 'alert', `<b>${L('Upload failed', 'अपलोड नहीं हुआ')}</b><br>${L('Nothing was attached. Check your connection and try again.', 'कुछ अटैच नहीं हुआ। कनेक्शन जाँचें और दोबारा कोशिश करें।')}`); acts = `<button class="btn sm pri" data-act="retry" data-v="${k}">${icon('retry', 16)}${L('Retry', 'दोबारा कोशिश')}</button>${fileBtn(k, L('Replace', 'बदलें'))}<button class="btn sm" data-act="rm" data-v="${k}">${L('Remove', 'हटाएँ')}</button>`; }
+  else if (it.status === 'bad') { st = alertBox('red', 'alert', L(BADMSG[it.code][0], BADMSG[it.code][1])); acts = fileBtn(k, L('Retake or replace', 'दोबारा लें या बदलें'), true) + `<button class="btn sm" data-act="rm" data-v="${k}">${L('Remove', 'हटाएँ')}</button>`; }
+  else { st = `<div>${chip('grn', 'check', L('Photo quality check passed', 'फ़ोटो क्वालिटी जाँच पास'))}<div class="xs mut" style="margin-top:4px">${L('Sharpness, lighting and size checked. Please confirm the details are legible.', 'शार्पनेस, रोशनी और साइज़ जाँचे गए। कृपया पुष्टि करें कि विवरण पढ़े जा सकते हैं।')}</div></div>`; acts = fileBtn(k, L('Replace', 'बदलें')) + `<button class="btn sm" data-act="rm" data-v="${k}">${L('Remove', 'हटाएँ')}</button>`; }
+  if (k === 'bill' && it && it.status === 'ok') extra = billAI();
+  return `<div class="ev"><div class="top">${it && it.url ? `<img class="thumb" src="${it.url}" alt="">` : `<span class="av" style="width:56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--pri-bg);color:var(--pri);flex:none">${icon(k === 'bill' ? 'doc' : k === 'hand' ? 'camera' : 'chat', 24)}</span>`}<div><b>${title}</b> ${req ? chip('blu', '', L('Needed here', 'यहाँ ज़रूरी')) : chip('', '', L('Optional', 'वैकल्पिक'))}<div>${it && it.sample ? `<span class="xs mut">${L('Sample image', 'सैंपल इमेज')}</span>` : ''}</div></div></div>${st}${acts ? `<div class="chips">${acts}</div>` : ''}${extra}</div>`;
+}
+function billAI() {
+  const bs = S.billState;
+  if (S.ask === 'bill') return `<div class="alert">${icon('sparkle', 18)}<div><b>${L('This sends your bill photo to an AI service. Review the extracted details before continuing.', 'यह आपकी बिल फ़ोटो एक AI सेवा को भेजता है। आगे बढ़ने से पहले निकाले गए विवरण जाँचें।')}</b><div class="chips" style="margin-top:10px"><button class="btn sm pri" data-act="readBill">${L('Send photo and read bill', 'फ़ोटो भेजें और बिल पढ़ें')}</button><button class="btn sm" data-act="manualBill">${L('Enter details myself', 'विवरण खुद भरें')}</button></div></div></div>`;
+  if (bs === 'reading') return `<p class="sm">${spin()} ${L('Reading bill…', 'बिल पढ़ा जा रहा है…')}</p>`;
+  if (bs === 'error') return alertBox('amb', 'alert', `<b>${L('AI is unavailable', 'AI उपलब्ध नहीं')}</b><br>${L('The bill could not be read automatically. Nothing was changed. Enter the details yourself.', 'बिल अपने-आप नहीं पढ़ा जा सका। कुछ नहीं बदला। विवरण खुद भरें।')}<div class="chips" style="margin-top:8px"><button class="btn sm" data-act="manualBill">${L('Enter details myself', 'विवरण खुद भरें')}</button><button class="btn sm" data-act="askBill">${L('Try again', 'दोबारा कोशिश')}</button></div>`);
+  if (!S.bill) return `<div class="chips"><button class="btn sm out" data-act="askBill">${icon('sparkle', 16)}${L('Read bill', 'बिल पढ़ें')}</button><button class="btn sm" data-act="manualBill">${L('Enter details myself', 'विवरण खुद भरें')}</button></div>`;
+  return '';
+}
+function billCard() {
+  const b = S.bill; if (!b || !okEv('bill')) return '';
+  const val = v => (v == null ? '' : esc(v));
+  const amtOk = b.total != null && Math.abs(b.total - H.amount) < 1, dateOk = b.date === '2026-10-06';
+  const li = (ok, txt) => `<div class="sm" style="display:flex;gap:8px;align-items:flex-start;color:${ok ? 'var(--grn)' : ok === false ? 'var(--amb)' : 'var(--mut)'}">${icon(ok ? 'check' : ok === false ? 'alert' : 'info', 16)}<span>${txt}</span></div>`;
+  const src = b.src === 'ai' ? L('Read by an AI service. Check every field against your bill.', 'AI सेवा ने पढ़ा। हर फ़ील्ड अपने बिल से मिलाएँ।') : b.src === 'sample' ? L("Sample output: live AI isn't available in this view. Check every field.", 'सैंपल आउटपुट: इस व्यू में लाइव AI उपलब्ध नहीं। हर फ़ील्ड जाँचें।') : L('Entered by you.', 'आपने भरा।');
+  return `<div class="card"><h2>${L('Bill details', 'बिल का विवरण')}</h2><p class="xs mut">${src}</p>
+   <div class="fld"><label for="bi">${L('Invoice number', 'इनवॉइस नंबर')}</label><input id="bi" type="text" data-in="bill.invoice_no" value="${val(b.invoice_no)}" placeholder="${L('Not read. Enter it.', 'पढ़ा नहीं गया। भरें।')}"></div>
+   <div class="two"><div class="fld"><label for="bd">${L('Bill date', 'बिल की तारीख')}</label><input id="bd" type="date" data-in="bill.date" value="${val(b.date)}"></div>
+   <div class="fld"><label for="bt">${L('Total (₹)', 'कुल (₹)')}</label><input id="bt" type="text" inputmode="decimal" data-in="bill.total" value="${b.total == null ? '' : b.total}" placeholder="${L('Not read', 'पढ़ा नहीं')}"></div></div>
+   <div class="fld"><label for="bm">${L('Item', 'आइटम')}</label><input id="bm" type="text" data-in="bill.item" value="${val(b.item)}"></div>
+   ${b.notes ? `<p class="xs mut">${L('Note from reading', 'पढ़ने का नोट')}: ${esc(b.notes)}</p>` : ''}
+   ${b.total == null ? li(false, L('Total not read. Enter it yourself.', 'कुल नहीं पढ़ा गया। खुद भरें।')) : li(amtOk, amtOk ? L('Bill total matches the held amount.', 'बिल का कुल होल्ड की राशि से मेल खाता है।') : L(`Bill total differs from the held ${inr(H.amount)}. Check before continuing.`, `बिल का कुल होल्ड की ${inr(H.amount)} से अलग है। आगे बढ़ने से पहले जाँचें।`))}
+   ${!b.date ? li(false, L('Date not read. Enter it yourself.', 'तारीख नहीं पढ़ी गई। खुद भरें।')) : li(dateOk, dateOk ? L('Bill date matches the payment date (6 Oct 2026).', 'बिल की तारीख पेमेंट की तारीख (6 अक्टूबर 2026) से मेल खाती है।') : L('Bill date differs from the payment date, 6 Oct 2026.', 'बिल की तारीख पेमेंट की तारीख, 6 अक्टूबर 2026, से अलग है।'))}
+   <p class="xs mut">${L('A matching total and date are consistency checks. They do not prove delivery.', 'कुल और तारीख का मेल केवल संगति की जाँच है। यह डिलीवरी साबित नहीं करता।')}</p></div>`;
+}
+function imeiHtml() {
+  const v = S.imei || '';
+  if (!v) return '';
+  if (v.length < 15 || !/^\d+$/.test(v)) return `<p class="xs mut">${L('Enter the 15 digits.', '15 अंक भरें।')}</p>`;
+  if (luhnOk(v)) return `${chip('grn', 'check', L('IMEI digit check passed', 'IMEI अंक जाँच पास'))}<p class="xs mut">${L('This does not verify the device or prove delivery.', 'यह डिवाइस को सत्यापित नहीं करता और डिलीवरी साबित नहीं करता।')}</p>`;
+  return `${chip('red', 'x', L('IMEI digit check failed', 'IMEI अंक जाँच विफल'))}<p class="xs mut">${L('Re-check the number on the bill or the box. It will not be attached.', 'बिल या डिब्बे पर नंबर दोबारा देखें। यह अटैच नहीं होगा।')}</p>`;
+}
+function wordsCard() {
+  let ai = '';
+  if (S.askW) ai = `<div class="alert">${icon('sparkle', 18)}<div><b>${L('This sends the text you entered to an AI service. Review the suggestion before using it. It should not add facts.', 'यह आपका लिखा टेक्स्ट एक AI सेवा को भेजता है। इस्तेमाल से पहले सुझाव जाँचें। यह नए तथ्य नहीं जोड़ना चाहिए।')}</b><div class="chips" style="margin-top:10px"><button class="btn sm pri" data-act="doWords">${L('Send text and help write', 'टेक्स्ट भेजें और लिखने में मदद लें')}</button><button class="btn sm" data-act="cancelAsk">${L('Cancel', 'रद्द करें')}</button></div></div></div>`;
+  else if (S.wordsState === 'busy') ai = `<p class="sm">${spin()} ${L('Writing…', 'लिखा जा रहा है…')}</p>`;
+  else if (S.wordsState === 'error') ai = alertBox('amb', 'alert', `<b>${L('AI is unavailable', 'AI उपलब्ध नहीं')}</b><br>${L('Nothing was changed. Use your words as written, or type the explanation in English on the next screen.', 'कुछ नहीं बदला। अपने शब्द जैसे हैं वैसे इस्तेमाल करें, या अगली स्क्रीन पर अंग्रेज़ी में लिखें।')}`);
+  else if (S.expl) ai = `<p class="sm">${chip('grn', 'check', S.explSrc === 'ai' ? L('Suggestion ready', 'सुझाव तैयार') : S.explSrc === 'sample' ? L('Sample suggestion ready', 'सैंपल सुझाव तैयार') : L('Explanation ready', 'विवरण तैयार'))}</p><p class="xs mut">${S.explSrc === 'sample' ? L("Sample output: live AI isn't available in this view. ", 'सैंपल आउटपुट: इस व्यू में लाइव AI उपलब्ध नहीं। ') : ''}${L('You can edit it on the next screen.', 'आप इसे अगली स्क्रीन पर बदल सकते हैं।')}</p>`;
+  return `<div class="card"><h2>${L('Your explanation', 'आपका विवरण')}</h2><p class="sm mut">${L('Say what happened, in Hindi, Hinglish or English. Only facts you know.', 'हिंदी, हिंग्लिश या अंग्रेज़ी में बताएँ क्या हुआ। केवल वही जो आप जानते हैं।')}</p>
+   <textarea id="wordsIn" rows="4" data-in="words" aria-label="${L('Your explanation', 'आपका विवरण')}">${esc(S.words)}</textarea>
+   <div class="chips"><button class="btn sm" data-act="useWords">${L('Use as written', 'जैसा लिखा वैसा रखें')}</button><button class="btn sm out" data-act="askWords">${icon('sparkle', 16)}${L('Help write my explanation', 'मेरा विवरण लिखने में मदद करें')}</button></div>${ai}</div>`;
+}
+SCREENS.docs = () => {
+  const respond = S.respondMode;
+  return scr(`${bar(L('Add supporting documents', 'सहायक दस्तावेज़ जोड़ें'))}<div class="body">
+   ${S.errMissing && !okEv('bill') ? alertBox('red', 'alert', `<b>${L('Your bill or invoice is missing', 'आपका बिल या इनवॉइस नहीं है')}</b><br>${L('Add a clear photo of it to continue. You can save a draft and come back.', 'आगे बढ़ने के लिए उसकी साफ़ फ़ोटो जोड़ें। आप ड्राफ़्ट सेव करके बाद में लौट सकते हैं।')}`) : ''}
+   <div class="card"><h2>${L('Added from payment records', 'पेमेंट रिकॉर्ड से जुड़ा')}</h2>
+     <div class="li" style="cursor:default"><span class="av">${icon('file', 20)}</span><span><b>${L('Transaction record', 'ट्रांज़ैक्शन रिकॉर्ड')}</b><small>${H.payId} · UTR ${H.utr}<br>${L('Attached automatically', 'अपने-आप अटैच')}</small></span><span style="color:var(--grn)">${icon('check', 20)}</span></div>
+     <div class="li" style="cursor:default"><span class="av">${icon('lock', 20)}</span><span><b>${L('Hold reference', 'होल्ड संदर्भ')}</b><small>${L('Police complaint ref.', 'पुलिस शिकायत संदर्भ')} ${H.ncrp}<br>${L('Attached automatically', 'अपने-आप अटैच')}</small></span><span style="color:var(--grn)">${icon('check', 20)}</span></div></div>
+   <div class="card"><h2>${L('Documents you provide', 'आप जो दस्तावेज़ देंगे')}</h2>
+     <p class="sm mut">${L('For this sale, made over the counter, these may help. Other cases may need different documents.', 'काउंटर पर हुई इस बिक्री के लिए ये मदद कर सकते हैं। दूसरे मामलों में अलग दस्तावेज़ लग सकते हैं।')}</p>
+     ${evBlock('bill', L('Bill or invoice', 'बिल या इनवॉइस'), 'A clear photo of the bill for this sale.', 'इस बिक्री के बिल की साफ़ फ़ोटो।', true)}
+     ${evBlock('hand', L('Handover or CCTV photo', 'हैंडओवर या CCTV फ़ोटो'), 'A photo or CCTV frame of the handover at the counter, if you have one.', 'काउंटर पर हैंडओवर की फ़ोटो या CCTV फ्रेम, अगर हो।', false)}
+     ${evBlock('chat', L('Customer communication', 'ग्राहक से बातचीत'), 'A screenshot of your chat or call log with the customer, if any.', 'ग्राहक से चैट या कॉल लॉग का स्क्रीनशॉट, अगर हो।', false)}
+     <div class="ev"><div class="top"><span class="av" style="width:56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--pri-bg);color:var(--pri);flex:none">${icon('phone', 24)}</span><div><b>IMEI</b> ${chip('', '', L('Optional', 'वैकल्पिक'))}</div></div>
+       <input id="imeiIn" type="text" inputmode="numeric" maxlength="15" data-in="imei" value="${esc(S.imei)}" placeholder="15 ${L('digits', 'अंक')}" aria-label="IMEI"><div id="imeiSt">${imeiHtml()}</div></div></div>
+   ${billCard()}${wordsCard()}
+  </div><div class="foot"><button class="btn pri" data-act="toSubmit">${L('Continue', 'आगे बढ़ें')}</button><button class="btn" data-act="saveDraft">${L('Save draft', 'ड्राफ़्ट सेव करें')}</button></div>`);
+};
+
+const SAMPLE_WORDS_HI = '6 तारीख को शाम लगभग 7:30 बजे एक ग्राहक मेरी दुकान पर आया और ₹14,999 का 5G फ़ोन ख़रीदा। उसने UPI से भुगतान किया, मैंने बिल दिया और काउंटर पर फ़ोन सौंप दिया। मैं उसे पहले से नहीं जानता था।';
+function hiReview(enc) {
+  const b = S.bill || {}, h = S.hi, txt = (S.expl || '').trim();
+  const cur = h.out && h.src === txt;
+  let ex;
+  if (!txt) ex = '<p>अभी जोड़ा नहीं गया।</p>';
+  else if (h.ask) ex = `<div class="alert">${icon('sparkle', 18)}<div><b>यह आपका अंग्रेज़ी विवरण हिंदी अनुवाद के लिए एक AI सेवा को भेजता है। अनुवाद जाँचें।</b><div class="chips" style="margin-top:10px"><button class="btn sm pri" data-act="hiGo">भेजें और अनुवाद करें</button><button class="btn sm" data-act="hiCancel">रद्द करें</button></div></div></div>`;
+  else if (h.state === 'busy') ex = `<p class="sm">${spin()} अनुवाद हो रहा है…</p>`;
+  else if (cur) ex = `<p style="white-space:pre-wrap">${esc(h.out)}</p><p class="xs mut">${h.state === 'sample' ? 'सैंपल अनुवाद: लाइव AI इस व्यू में उपलब्ध नहीं। ' : 'AI अनुवाद। '}यह इस समय के अंग्रेज़ी विवरण से मेल खाता है।</p>`;
+  else ex = `${h.out ? '<p class="xs" style="color:var(--amb)">पिछला अनुवाद पुराना है क्योंकि विवरण बदला। दोबारा अनुवाद करें।</p>' : ''}${h.state === 'error' ? alertBox('amb', 'alert', 'AI उपलब्ध नहीं। नीचे आपके मूल शब्द देखें और अंग्रेज़ी टेक्स्ट किसी भरोसेमंद व्यक्ति से जँचवाएँ।') : ''}<button class="btn sm out" data-act="hiAsk">हिंदी अनुवाद दिखाएँ</button>`;
+  return `<div class="card blu"><h2>पत्र का हिंदी सारांश</h2><p class="xs mut">पत्र अंग्रेज़ी में जाएगा। यह सारांश आपके चुने तथ्यों और अटैचमेंट से बनता है। ${S.letterEdited ? '<b style="color:var(--amb)">आपने पत्र खुद बदला है; यह सारांश आपके बदलावों को नहीं दिखाता। बदला हुआ अंग्रेज़ी पत्र ध्यान से पढ़ें।</b>' : ''}</p>
+   <p><b>तथ्य:</b> ${esc(M.nameHi)}, लखनऊ। आप ${inr(H.amount)} के पेमेंट ${H.payId} (UTR ${H.utr}) को 6 अक्टूबर 2026 की अपनी दुकान की बिक्री के रूप में पहचानते हैं${b.invoice_no ? ' (बिल ' + esc(b.invoice_no) + ')' : ''}। यह पेमेंट पुलिस शिकायत संदर्भ ${H.ncrp} से जुड़े होल्ड पर है।</p>
+   <div><b>आपका विवरण (हिंदी में):</b>${ex}</div>
+   <p><b>अनुरोध:</b> Razorpay संलग्न रिकॉर्ड देखे और संतुष्ट होने पर लागू शिकायत प्रक्रिया के ज़रिए जाँच प्राधिकरण से समन्वय करे। निर्णय जाँच अधिकारी का होता है।</p>
+   <p><b>संलग्न (${enc.length}):</b> ${enc.map(e => e.t[1]).join(', ')}।</p></div>`;
+}
+SCREENS.submit = () => {
+  if (!S.letterEdited) S.letter = buildLetter();
+  const enc = enclosures();
+  const ready = okEv('bill') && (S.expl || '').trim() && S.ack && !S.letterStale;
+  return scr(`${bar(L('Submit grievance', 'शिकायत जमा करें'))}<div class="body">
+   ${S.sub === 'fail' ? alertBox('red', 'alert', `<b>${L('Submission failed', 'जमा नहीं हो सका')}</b><br>${L('Nothing was sent to Razorpay. Your documents and text are saved here. Try again.', 'Razorpay को कुछ नहीं भेजा गया। आपके दस्तावेज़ और टेक्स्ट यहाँ सुरक्षित हैं। दोबारा कोशिश करें।')}`) : ''}
+   <div class="card"><h2>${L('Your explanation', 'आपका विवरण')}</h2>
+     <textarea id="explIn" rows="4" data-in="expl" aria-label="${L('Your explanation', 'आपका विवरण')}">${esc(S.expl)}</textarea>
+     <p class="xs mut">${S.explSrc === 'ai' ? L('Written with AI help from your words. Check it says only what is true.', 'आपके शब्दों से AI की मदद से लिखा। जाँचें कि इसमें केवल सच है।') : S.explSrc === 'sample' ? L('Sample AI output. Check it says only what is true. Editing it makes it your wording.', 'सैंपल AI आउटपुट। जाँचें कि इसमें केवल सच है। बदलने पर यह आपके शब्द बन जाता है।') : L('Check it says only what is true.', 'जाँचें कि इसमें केवल सच है।')}</p></div>
+   <div class="card"><h2>${L('Attachments', 'अटैचमेंट')} (${enc.length})</h2>${enc.map(e => `<div class="li" style="cursor:default;min-height:48px"><span class="av">${icon(e.ic, 18)}</span><span><b>${L(e.t[0], e.t[1])}</b><small>${S.lang === 'hi' ? e.s[1] : e.s[0]}</small></span></div>`).join('')}<p class="xs mut">${L('Only documents you actually attached are listed.', 'केवल वही दस्तावेज़ दिख रहे हैं जो आपने वाकई जोड़े।')}</p></div>
+   ${S.lang === 'hi' ? hiReview(enc) : ''}
+   ${(S.words || '').trim() && S.words.trim() !== (S.expl || '').trim() ? `<div class="card tight"><h3>${L('Your original words', 'आपके मूल शब्द')}</h3><p class="sm" style="white-space:pre-wrap">${esc(S.words)}</p><p class="xs mut">${L('Kept next to the English text so you can compare.', 'तुलना के लिए अंग्रेज़ी टेक्स्ट के साथ रखे गए।')}</p></div>` : ''}
+   <div class="card"><h2>${L('Grievance letter', 'शिकायत पत्र')}</h2>
+     ${S.letterStale ? alertBox('amb', 'alert', `<b>${L('Resolve this before submitting', 'जमा करने से पहले इसे सुलझाएँ')}</b><br>${L('Your attachments or details changed after you edited the letter, so it may not match. Update its enclosure list, reset the letter, or confirm you have checked it.', 'पत्र बदलने के बाद आपके अटैचमेंट या विवरण बदले, इसलिए पत्र मेल न खाए। संलग्नक सूची अपडेट करें, पत्र रीसेट करें, या पुष्टि करें कि आपने जाँच लिया है।')}<div class="chips" style="margin-top:8px"><button class="btn sm" data-act="fixEncl">${L('Update enclosure list', 'संलग्नक सूची अपडेट करें')}</button><button class="btn sm" data-act="resetLetter">${L('Reset letter', 'पत्र रीसेट')}</button><button class="btn sm" data-act="okLetter">${L('I have checked it', 'मैंने जाँच लिया')}</button></div>`) : ''}
+     <textarea id="letterTa" rows="14" data-in="letter" style="font-size:13.5px" aria-label="${L('Grievance letter', 'शिकायत पत्र')}">${esc(S.letter)}</textarea>
+     <p class="xs mut">${L('The letter is in English, addressed to Razorpay. You can edit it.', 'पत्र अंग्रेज़ी में है और Razorpay को संबोधित है। आप इसे बदल सकते हैं।')}</p>
+     ${S.letterEdited ? `<button class="btn sm" style="align-self:flex-start" data-act="resetLetter">${L('Reset to generated letter', 'बना हुआ पत्र वापस लाएँ')}</button>` : ''}</div>
+   <label class="ck"><input type="checkbox" data-act="ack" ${S.ack ? 'checked' : ''}><span>${L('I confirm the facts and documents in this grievance are accurate to the best of my knowledge.', 'मैं पुष्टि करता हूँ कि इस शिकायत के तथ्य और दस्तावेज़ मेरी जानकारी में सही हैं।')}</span></label>
+   <p class="fine">${L('Target: prepare and submit to Razorpay in under two minutes, with evidence ready.', 'लक्ष्य: सबूत तैयार होने पर दो मिनट से कम में Razorpay को तैयार करके जमा करना।')}</p>
+  </div><div class="foot"><button class="btn pri" data-act="confirmSubmit" ${ready ? '' : 'disabled'}>${S.sub === 'busy' ? spin() : ''}${L('Confirm and submit', 'पुष्टि करें और जमा करें')}</button>${ready ? '' : `<p class="fine">${!okEv('bill') ? L('Add your bill first. ', 'पहले बिल जोड़ें। ') : ''}${!(S.expl || '').trim() ? L('Add an explanation. ', 'विवरण जोड़ें। ') : ''}${S.letterStale ? L('Resolve the letter warning. ', 'पत्र की चेतावनी सुलझाएँ। ') : ''}${!S.ack ? L('Tick the confirmation.', 'पुष्टि पर टिक करें।') : ''}</p>`}</div>`);
+};
+
+SCREENS.confirm = () => scr(`${bar(L('Submitted', 'जमा हुआ'))}<div class="body">
+  <div class="card grn" style="align-items:flex-start"><span style="color:var(--grn)">${icon('check', 28)}</span><h2 style="font-size:20px">${L('Grievance pack received', 'शिकायत पैक मिल गया')}</h2></div>
+  <div class="card">${kv(L('Razorpay intake receipt', 'Razorpay इनटेक रसीद'), H.rcpt)}${kv(L('Submitted', 'जमा किया'), dfmt([13, 9], '4:16 PM') + `<br><span class="xs mut">${L('sample time', 'सैंपल समय')}</span>`)}
+    <p class="xs mut">${L("This is Razorpay's intake receipt. It is not an acknowledgment from the grievance portal; that appears in the tracker only once filing is confirmed.", 'यह Razorpay की इनटेक रसीद है। यह शिकायत पोर्टल की पावती नहीं है; वह ट्रैकर में फ़ाइलिंग की पुष्टि के बाद ही दिखेगी।')}</p></div>
+  <div class="card"><p>${L('Razorpay reviews your pack and coordinates the next step. The proposed institutional filing route is through Razorpay or its nodal bank, subject to confirmation.', 'Razorpay आपका पैक देखता है और अगला कदम समन्वित करता है। प्रस्तावित संस्थागत फ़ाइलिंग मार्ग Razorpay या उसके नोडल बैंक के ज़रिए है, पुष्टि के अधीन।')} ${A('asm')}</p>
+    <p class="xs mut">${L('The OTP confirmed that you submitted this pack. It is not a legal digital signature.', 'OTP ने पुष्टि की कि आपने यह पैक जमा किया। यह कानूनी डिजिटल हस्ताक्षर नहीं है।')}</p>
+    <p class="xs mut">${L('Release is one possible outcome, never a promise.', 'रिलीज़ एक संभावित नतीजा है, वादा नहीं।')}</p></div>
+  </div><div class="foot"><button class="btn pri" data-act="trackReplace">${L('Track your grievance', 'अपनी शिकायत ट्रैक करें')}</button><div class="two"><button class="btn" data-act="pack">${icon('down', 18)}${L('View grievance letter', 'शिकायत पत्र देखें')}</button><button class="btn" data-act="contact">${L('Contact support', 'सपोर्ट से संपर्क')}</button></div></div>`);
+
+SCREENS.track = () => {
+  const c = cstate(), tl = c.done;
+  const nextTxt = c.last ? L(c.last.nx[0], c.last.nx[1]) : '';
+  const act = c.next && c.next.act;
+  const ext = S.sim.extna;
+  const ackBox = c.ack ? (S.sim.ackna ? alertBox('amb', 'alert', `<b>${L('Institutional acknowledgment unavailable', 'संस्थागत पावती उपलब्ध नहीं')}</b><br>${L('Razorpay has not shared the portal acknowledgment number yet. Your Razorpay receipt is not a substitute. Contact support if this stays blank.', 'Razorpay ने अभी पोर्टल की पावती संख्या साझा नहीं की। Razorpay की रसीद उसका विकल्प नहीं है। खाली रहे तो सपोर्ट से संपर्क करें।')}`)
+    : `<div class="card tight">${kv(L('Institutional acknowledgment', 'संस्थागत पावती'), H.ackNo + ' <span class="xs mut">(sample)</span>')}${kv(L('Razorpay intake receipt', 'Razorpay इनटेक रसीद'), H.rcpt)}<p class="xs mut">${L('These are two different records.', 'ये दो अलग रिकॉर्ड हैं।')}</p></div>`) : '';
+  const closed = c.end ? `<div class="card ${c.set === 'processed' ? 'grn' : 'amb'}"><h2>${c.set === 'processed' ? L('Case closed: summary', 'मामला बंद: सारांश') : L('Review completed · Hold continues', 'समीक्षा पूरी · होल्ड जारी')}</h2>
+     ${c.set === 'processed' ? `<p>${L(`Hold removed and ${inr(H.amount)} processed in a settlement. Bank arrival time depends on your bank.`, `होल्ड हटा और ${inr(H.amount)} सेटलमेंट में प्रोसेस हुए। बैंक में आने का समय आपके बैंक पर निर्भर है।`)}</p>`
+      : `<p>${L('The district officer kept the hold after review. The hold on this payment continues. You can talk to support about options, or speak to a lawyer.', 'ज़िला अधिकारी ने समीक्षा के बाद होल्ड जारी रखा। इस पेमेंट पर होल्ड जारी है। विकल्पों के लिए सपोर्ट से बात करें, या वकील से मिलें।')}</p>`}
+     ${kv(L('Received by Razorpay', 'Razorpay को मिला'), dfmt([13, 9], '4:16 PM'))}${kv(c.set === 'processed' ? L('Closed', 'बंद') : L('Review completed', 'समीक्षा पूरी'), dfmt(tl[tl.length - 1].d, tl[tl.length - 1].t))}
+     <div class="chips"><button class="btn sm" data-act="pack">${L('View grievance letter', 'शिकायत पत्र देखें')}</button><button class="btn sm" data-act="contact">${L('Contact support', 'सपोर्ट से संपर्क')}</button></div></div>` : '';
+  const nextCard = c.end ? '' : `<div class="card blu"><h3>${L('Next step', 'अगला कदम')}</h3>
+     ${ext ? `<p>${L('We could not refresh the latest status from the institution. The timeline shows the last update we have.', 'संस्था से ताज़ा स्टेटस नहीं मिल सका। टाइमलाइन में हमारा आख़िरी अपडेट दिख रहा है।')}</p><button class="btn sm" style="align-self:flex-start" data-act="extRetry">${icon('retry', 16)}${L('Check again', 'फिर जाँचें')}</button>`
+      : act ? `<p><b>${L(act === 'review' ? 'You can request a review of this decision.' : 'Razorpay needs one more document from you.', act === 'review' ? 'आप इस निर्णय की समीक्षा माँग सकते हैं।' : 'Razorpay को आपसे एक और दस्तावेज़ चाहिए।')}</b></p><p class="sm">${nextTxt}</p><button class="btn pri" data-act="${act === 'review' ? 'reviewOpen' : 'respOpen'}">${act === 'review' ? L('Request review', 'समीक्षा का अनुरोध') : L('Add requested document', 'माँगा गया दस्तावेज़ जोड़ें')}</button>`
+      : `<p>${nextTxt}</p>`}</div>`;
+  const dl = c.dl && !c.end ? `<div class="dl"><h3>${L('Date to watch', 'ध्यान देने की तारीख')}</h3><div class="kv"><span>${L(c.dl.l[0], c.dl.l[1])}</span><b>${dfmt(c.dl.d)}</b></div><p class="xs mut">${L(c.dl.b[0], c.dl.b[1])}</p><p class="xs mut">${L('A future date, not an event that has happened.', 'भविष्य की तारीख, घटित घटना नहीं।')}</p></div>` : '';
+  return scr(`${bar(L('Track your grievance', 'अपनी शिकायत ट्रैक करें'))}<div class="body">
+   <div class="card"><div class="kv"><span>${inr(H.amount)} · ${H.payId}</span></div>${statusList()}</div>
+   ${ext ? alertBox('amb', 'alert', `<b>${L('External status unavailable', 'बाहरी स्टेटस उपलब्ध नहीं')}</b><br>${L('Updates from the institution may be delayed.', 'संस्था के अपडेट में देरी हो सकती है।')}`) : ''}
+   ${closed}${nextCard}${ackBox}
+   <div class="card"><h3>${L('Timeline', 'टाइमलाइन')}</h3><ol class="tl">${tl.map((s, i) => `<li><span class="dot ${i === tl.length - 1 && !c.end ? 'now' : ''}">${icon('check', 12)}</span><b>${L(s.ti[0], s.ti[1])}</b><span class="when">${dfmt(s.d, s.t)} · ${L(STAGE[s.st][0], STAGE[s.st][1])}</span><p>${s.ack && S.sim.ackna ? L('Filing confirmed by Razorpay. The portal acknowledgment number is not available yet.', 'Razorpay ने फ़ाइलिंग की पुष्टि की। पोर्टल की पावती संख्या अभी उपलब्ध नहीं।') : L(s.de[0], s.de[1])}</p></li>`).join('')}</ol></div>
+   ${dl}
+   <p class="fine">${L('Release is one possible outcome, never a promise. Dates in this demo are simulated.', 'रिलीज़ एक संभावित नतीजा है, वादा नहीं। इस डेमो की तारीखें सिमुलेटेड हैं।')}</p>
+  </div>`);
+};
+
+SCREENS.grievances = () => scr(`${bar(L('Existing grievances', 'मौजूदा शिकायतें'))}<div class="body">
+  ${S.submitted ? `<div class="card tight"><button class="li" data-act="track"><span class="av">${icon('doc', 20)}</span><span><b>${L('Payment hold', 'पेमेंट होल्ड')} · ${inr(H.amount)}</b><small>${H.rcpt} · ${L(STAGE[Math.max(1, cstate().stage)][0], STAGE[Math.max(1, cstate().stage)][1])}</small></span>${icon('chev', 18)}</button></div>`
+   : `<div class="card"><p>${L('No grievances yet.', 'अभी कोई शिकायत नहीं।')}</p><p class="sm mut">${L('If a payment is put on hold, you can start from Payment Hold Help.', 'अगर कोई पेमेंट होल्ड पर जाता है, तो आप पेमेंट होल्ड में मदद से शुरू कर सकते हैं।')}</p></div>`}</div>`, { tabs: true });
+
+SCREENS.support = () => scr(`<header class="bar home"><h1>${L('Support', 'सपोर्ट')}</h1>${langToggle()}</header><div class="body">
+  <div class="card"><h3>${L('Get help', 'मदद पाएँ')} ${A('obs')}</h3>${toolBtn('chat', L('Chat with us', 'हमसे चैट करें'))}${toolBtn('list', L('Help articles', 'हेल्प आर्टिकल'))}</div>
+  <div class="card"><h3>${L('Payment holds and restrictions', 'पेमेंट होल्ड और रोक')} ${A('new')}</h3>
+    <button class="li" data-act="start"><span class="av amb">${icon('lock', 20)}</span><span><b>${L('Payment Hold Help', 'पेमेंट होल्ड में मदद')}</b><small>${L('Understand a hold and send a grievance to Razorpay', 'होल्ड समझें और Razorpay को शिकायत भेजें')}</small></span>${icon('chev', 18)}</button>
+    <button class="li" data-act="grievances"><span class="av">${icon('doc', 20)}</span><span><b>${L('Existing grievances', 'मौजूदा शिकायतें')}</b><small>${S.submitted ? L('1 grievance', '1 शिकायत') : L('None yet', 'अभी कोई नहीं')}</small></span>${icon('chev', 18)}</button>
+    <button class="li" data-act="bankOpen"><span class="av">${icon('bank', 20)}</span><span><b>${L('Bank account restricted?', 'बैंक अकाउंट पर रोक?')}</b><small>${L('Prepare records for your bank branch', 'बैंक शाखा के लिए रिकॉर्ड तैयार करें')}</small></span>${icon('chev', 18)}</button></div>
+  </div>`, { tabs: true });
+
+SCREENS.bank = () => {
+  if (!S.bankEdited) S.bankLetter = bankLetter();
+  const items = [['id', ['Photo ID and PAN', 'फ़ोटो ID और PAN']], ['pass', ['Passbook or account details', 'पासबुक या अकाउंट विवरण']], ['let', ['Printed copy of this letter, signed', 'इस पत्र की प्रिंटेड, हस्ताक्षरित कॉपी']], ['rec', ['Razorpay payment record', 'Razorpay पेमेंट रिकॉर्ड']], ['bills', ['Bills for the payments involved', 'संबंधित पेमेंट के बिल']], ['ask', ["Ask for the restriction in writing and the bank grievance officer's name", 'रोक लिखित में और बैंक के ग्रीवेंस अधिकारी का नाम माँगें']], ['note', ['Note the date, time and reference number of your visit', 'अपनी विज़िट की तारीख, समय और संदर्भ नंबर लिखें']]];
+  return scr(`${bar(L('Bank account restricted?', 'बैंक अकाउंट पर रोक?'))}<div class="body">
+   ${alertBox('', 'info', `<b>${L('This prepares records for Razorpay payments. Other transactions or complaints may also affect your bank account.', 'यह Razorpay पेमेंट्स के रिकॉर्ड तैयार करता है। अन्य ट्रांज़ैक्शन या शिकायतें भी आपके बैंक अकाउंट पर असर डाल सकती हैं।')}</b>`)}
+   <div class="card"><h2>${L('Razorpay payment record', 'Razorpay पेमेंट रिकॉर्ड')}</h2>${kv(L('Payment', 'पेमेंट'), inr(H.amount) + ' · ' + H.payId)}${kv('UTR', H.utr)}${kv(L('Paid', 'भुगतान'), dfmt([6, 9], '7:42 PM'))}${kv(L('Invoice', 'इनवॉइस'), H.inv)}<p class="xs mut">${L('This shows the payment moved. It does not by itself show a sale or delivery.', 'यह दिखाता है कि पेमेंट हुआ। यह अकेले बिक्री या डिलीवरी नहीं दिखाता।')}</p></div>
+   <div class="card"><h2>${L('Letter to your bank branch', 'बैंक शाखा को पत्र')}</h2><p class="xs mut">${L('English letter. Fill the [brackets] and edit freely.', 'अंग्रेज़ी पत्र। [ब्रैकेट] भरें और बदलें।')}</p>
+     <textarea id="bankTa" rows="14" data-in="bankLetter" style="font-size:13.5px" aria-label="${L('Letter to your bank branch', 'बैंक शाखा को पत्र')}">${esc(S.bankLetter)}</textarea>
+     <div class="chips"><button class="btn sm" data-act="copyBank">${L('Copy letter', 'पत्र कॉपी करें')}</button>${S.bankEdited ? `<button class="btn sm" data-act="bankReset">${L('Reset', 'रीसेट')}</button>` : ''}</div></div>
+   <div class="card"><h2>${L('Branch-visit checklist', 'शाखा-विज़िट चेकलिस्ट')}</h2>${items.map(([k, l]) => `<label class="ck"><input type="checkbox" data-act="chk" data-v="${k}" ${S.chk[k] ? 'checked' : ''}><span>${L(l[0], l[1])}</span></label>`).join('')}</div>
+   <p class="fine">${L("The bank decides how to handle its own restriction. Razorpay can't remove a bank-account freeze. Ask the bank to review it and to use its grievance route.", 'बैंक अपनी रोक पर खुद निर्णय लेता है। Razorpay बैंक-अकाउंट फ़्रीज़ नहीं हटा सकता। बैंक से उसकी समीक्षा और अपनी ग्रीवेंस प्रक्रिया इस्तेमाल करने को कहें।')}</p>
+  </div>`);
+};
+SCREENS.products = () => scr(`<header class="bar home"><h1>${L('Products', 'प्रोडक्ट्स')}</h1>${langToggle()}</header><div class="body"><div class="card"><h3>${L('Collect', 'वसूली')} ${A('obs')}</h3>${toolBtn('qr', 'Razorpay QR')}${toolBtn('link', L('Payment Links', 'पेमेंट लिंक'))}${toolBtn('page', L('Payment Pages', 'पेमेंट पेज'))}</div><p class="fine">${L('Unchanged by Payment Hold Help. Not part of this prototype.', 'पेमेंट होल्ड में मदद से अपरिवर्तित। इस प्रोटोटाइप का हिस्सा नहीं।')}</p></div>`, { tabs: true });
+SCREENS.account = () => scr(`<header class="bar home"><h1>${L('Account', 'अकाउंट')}</h1>${langToggle()}</header><div class="body"><div class="card">${kv(L('Business', 'व्यवसाय'), L(M.name, M.nameHi))}${kv(L('Location', 'स्थान'), M.city)}${kv('GSTIN', M.gstin)}</div><p class="fine">${L('Sample merchant. All details are invented.', 'सैंपल मर्चेंट। सभी विवरण काल्पनिक हैं।')}</p></div>`, { tabs: true });
+
+/* ---- sheets ---- */
+function sheetHTML() {
+  const k = S.sheet; if (!k) return '';
+  const close = `<button class="btn" data-act="closeSheet">${L('Close', 'बंद करें')}</button>`;
+  if (k === 'otp') return `<h2 style="font-size:17px">${L('Confirm with OTP', 'OTP से पुष्टि करें')}</h2><p class="sm">${L('Enter the code sent to your registered mobile ending 210 (sample).', 'आपके रजिस्टर्ड मोबाइल (अंत 210) पर भेजा कोड भरें (सैंपल)।')}</p>
+    <input id="otpIn" type="text" inputmode="numeric" maxlength="6" data-in="otp" aria-label="OTP" placeholder="------" style="font-size:20px;letter-spacing:.3em;text-align:center">
+    ${S.otpErr ? `<p class="sm" style="color:var(--red)" role="alert">${S.otpErr}</p>` : ''}<p class="xs mut">${L('Sample code for this prototype: ', 'इस प्रोटोटाइप का सैंपल कोड: ')}${H.otp}. ${L('The OTP confirms that you submitted this pack. It is not a legal digital signature.', 'OTP पुष्टि करता है कि आपने यह पैक जमा किया। यह कानूनी डिजिटल हस्ताक्षर नहीं है।')}</p>
+    <button class="btn pri" data-act="otpOk">${S.sub === 'busy' ? spin() : ''}${L('Verify and submit', 'सत्यापित करें और जमा करें')}</button>${close}`;
+  if (k === 'pack') return `<h2 style="font-size:17px">${L('Grievance letter', 'शिकायत पत्र')}</h2><p class="xs mut">${L("File download isn't available in this preview. This is the letter text; the attachments are listed in it.", 'इस प्रीव्यू में फ़ाइल डाउनलोड उपलब्ध नहीं। यह पत्र का टेक्स्ट है; अटैचमेंट इसमें सूचीबद्ध हैं।')}</p>
+    <textarea id="packTa" rows="12" readonly style="font-size:12.5px">${esc(S.letter || buildLetter())}</textarea><button class="btn" data-act="copyPack">${L('Copy letter text', 'पत्र का टेक्स्ट कॉपी करें')}</button>${close}`;
+  if (k === 'contact') return `<h2 style="font-size:17px">${L('Contact support', 'सपोर्ट से संपर्क')}</h2><p>${L('In the real app, this would open support chat. In this prototype nothing is sent.', 'असली ऐप में यह सपोर्ट चैट खोलता। इस प्रोटोटाइप में कुछ नहीं भेजा जाता।')}</p>${close}`;
+  if (k === 'review') return `<h2 style="font-size:17px">${L('Request review', 'समीक्षा का अनुरोध')}</h2><p class="sm">${L('The District Grievance Officer reviews the decision. A review can also leave the hold in place.', 'ज़िला ग्रीवेंस अधिकारी निर्णय की समीक्षा करता है। समीक्षा में होल्ड जारी भी रह सकता है।')}</p>
+    <div class="fld"><label for="rvIn">${L('Why do you want a review? (optional)', 'समीक्षा क्यों चाहिए? (वैकल्पिक)')}</label><textarea id="rvIn" rows="3" data-in="reviewNote">${esc(S.reviewNote)}</textarea></div>
+    <button class="btn pri" data-act="reviewSend">${L('Submit review request', 'समीक्षा अनुरोध जमा करें')}</button>${close}`;
+  if (k === 'resp') return `<h2 style="font-size:17px">${L('Add requested document', 'माँगा गया दस्तावेज़ जोड़ें')}</h2><p class="sm">${L('Razorpay asked for a clearer customer chat or handover photo. Your original receipt time stays 13 Oct, 4:16 PM.', 'Razorpay ने ग्राहक की ज़्यादा साफ़ चैट या हैंडओवर फ़ोटो माँगी है। आपकी मूल रसीद का समय 13 अक्टूबर, 4:16 PM ही रहेगा।')}</p>
+    ${S.respDoc ? `<div class="top" style="display:flex;gap:12px;align-items:center"><img class="thumb" src="${S.respDoc.url}" alt="">${chip('grn', 'check', L('Ready to send', 'भेजने को तैयार'))}</div>` : ''}
+    <div class="chips"><label class="btn sm">${icon('camera', 16)}${S.respDoc ? L('Replace', 'बदलें') : L('Choose photo', 'फ़ोटो चुनें')}<input type="file" accept="image/*" class="vh" data-file="resp"></label></div>
+    <button class="btn pri" data-act="respSend" ${S.respDoc ? '' : 'disabled'}>${L('Send to Razorpay', 'Razorpay को भेजें')}</button>${close}`;
+  return '';
+}
+
+/* ===== render ===== */
+function render(keep) {
+  const sc = $('.body', app), top = sc ? sc.scrollTop : 0;
+  const r = cur(); app.innerHTML = (SCREENS[r] || SCREENS.home)();
+  const nb = $('.body', app); if (nb && keep) nb.scrollTop = top;
+  if (S.sheet) { sheetEl.innerHTML = `<div role="dialog" aria-modal="true">${sheetHTML()}</div>`; sheetEl.hidden = false; } else { sheetEl.hidden = true; sheetEl.innerHTML = ''; }
+  document.documentElement.lang = S.lang === 'hi' ? 'hi' : 'en';
+  renderRail();
+}
+/* ===== presenter rail ===== */
+const pill = (act, v, on, b, s) => `<button class="pill" data-act="${act}" data-v="${v}" aria-pressed="${on}"><span><b>${b}</b>${s ? `<small>${s}</small>` : ''}</span></button>`;
+function railDemo() {
+  const c = cstate(), run = S.t0 && !S.tEnd, el = S.t0 ? (S.tEnd || Date.now()) - S.t0 : 0;
+  const nxt = c.next;
+  return `<div class="pn"><h2>Timer</h2><div class="tm" id="tm">${mmss(el)}</div>
+    <p class="fine">${!S.t0 ? 'Starts when the merchant taps "Get help with this hold".' : run ? 'Running.' : 'Stopped at submission.'} Target: prepare and submit to Razorpay in under two minutes, with evidence ready. Sample autofill shows interaction speed, not validated merchant performance.</p></div>
+  <div class="pn"><h2>Scenario</h2><p class="fine">Each outcome has its own forward-only timeline. Changing it here restarts the tracker at "received". The merchant UI has no way to switch outcomes.</p>
+    ${Object.keys(BRN).map(k => pill('branch', k, S.branch === k, BRN[k][0], BRN[k][1])).join('')}
+    <div class="row"><button class="btn pri" data-act="adv">Advance simulated time</button><button class="btn" data-act="end">Jump to end</button></div>
+    <p class="fine" id="advMsg">${!S.submitted ? 'Submit as the merchant first.' : c.end ? 'Case is closed.' : nxt ? `Next: ${dfmt(nxt.d, nxt.t)} · ${nxt.ti[0]}${nxt.act ? ' (needs the merchant)' : ''}` : ''}</p></div>
+  <div class="pn"><h2>Demo helpers</h2><p class="fine">Load sample evidence without a camera. Sample images are drawn in your browser.</p>
+    <div class="row">${[['bill', 'Sample bill'], ['blur', 'Blurry bill'], ['hand', 'Handover photo'], ['chat', 'Customer chat'], ['imei', 'IMEI'], ['words', 'My words'], ['resp', 'Requested document'], ['all', 'Fill everything']].map(([k, l]) => `<button class="btn" data-act="help" data-v="${k}">${l}</button>`).join('')}</div></div>
+  <div class="pn"><h2>Failure states</h2><p class="fine">Armed failures fire once, then clear.</p>
+    ${[['upfail', 'Next upload fails', 'Shows retry'], ['aioff', 'AI unavailable', 'Bill reading and rewriting fall back'], ['subfail', 'Next submission fails', 'No success shown'], ['ackna', 'Institutional acknowledgment unavailable', 'Tracker shows a gap, not the receipt'], ['extna', 'External status unavailable', 'Tracker shows last known update']].map(([k, b, s]) => pill('sim', k, S.sim[k], b, s)).join('')}</div>
+  <div class="pn"><h2>View</h2>
+    ${pill('ann', '', S.ann, 'Show annotations', 'Observed Razorpay UI · Proposed addition · Assumption to confirm')}
+    <p class="fine">Tags follow the brief's description of the published app screenshots. Check them against the Play Store listing before presenting. I have not verified pixel-level fidelity.</p>
+    <div class="row"><label class="btn">Load official logo<input type="file" accept="image/*" class="vh" data-file="logo"></label>${S.logo ? '<button class="btn" data-act="noLogo">Remove logo</button>' : ''}<button class="btn" data-act="restart">Restart demo</button></div>
+    <p class="fine">Logo: download from Razorpay's brand-assets page and load it here. It stays in this browser tab only, scaled by height with proportions kept. No combined logo is made.</p></div>`;
+}
+function railPitch() {
+  return `<div class="pn"><h2>Payment Hold Help</h2>
+    <p class="quote">When police hold a payment, a Razorpay merchant should understand the hold and get a complete grievance to Razorpay fast. Target: prepare and submit to Razorpay in under two minutes, with evidence ready.</p>
+    <p class="fine">Proposed feature inside the Razorpay Payments for Business mobile app. Contextual, not a sixth tab. Track 1: one merchant job, done well on mobile.</p>
+    <h4>Why it matters</h4><p>About ₹8.26 lakh was frozen from August 2025 until a June 2026 High Court order directed defreezing over a ₹1,000 sale.</p>
+    <p class="fine">Sri Sai Wines v. Union of India, W.P. 969/2026, Andhra Pradesh High Court, order of 22 June 2026. The order names no payment aggregator. It shows how severe a hold can be, not how often Razorpay merchants face one. It directs defreezing; it is not evidence of when the bank actually released the funds.</p>
+    <h4>Why now</h4><ul><li>MHA SOP for NCRP-CFCFRMS (2 Jan 2026) puts grievances on fixed clocks.</li><li>Supreme Court directed nationwide adoption on 9 Feb 2026.</li><li>PIB reports the grievance module functional since April 2026.</li></ul>
+    <h4>The job</h4><p>Suresh, a Lucknow phone-shop owner who prefers Hindi, sees a hold on one ₹14,999 QR payment. He needs to understand it, assemble evidence of the sale and get a complete grievance to Razorpay, from his phone, between customers.</p>
+    <h4>What is different</h4><p>Integrated hold context, Razorpay payment records, evidence preparation and institutional coordination, inside the app he already uses. We do not claim to be the first or only approach.</p>
+    <h4>How merchants cope today (hypothesis, not observed)</h4><p>Notice the hold, probably through a settlement shortfall. Call support or the bank. Work out which payment is involved. Dig out the bill and chat. Write an explanation. Follow up with no clear clock. We have not interviewed merchants; validating this is the first next step.</p>
+    <h4>Why mobile, and three decisions</h4><p>The camera (bill, counter), the customer chat, the QR payment and Hindi assistance are all already on the phone, and the merchant is between customers. Decisions: start from the hold, not a form; reuse authoritative payment records; keep AI optional with the merchant reviewing everything.</p>
+    <h4>How AI was used in the build</h4><p>Claude and Claude Code built the prototype, the English and Hindi copy and the sample assets, verified claims against primary sources such as the official SOP, and ran scripted browser tests across the main flow, all five tracker outcomes, the failure states, Hindi and a phone-width dark-mode view. ChatGPT/Codex audited the notes and source over several rounds; each finding was checked against sources or reproduced before any change. The team also checked the prototype in the browser by hand. Example: an audit flagged the tracker; a test reproduced it (after escalation, the next update jumped back to the 22/23 Oct release dates); it was rebuilt as separate forward-only timelines per outcome. No productivity multiple is claimed.</p>
+    <h4>Measurement</h4><ul><li><b>North star:</b> first-time completeness, the share of packs accepted as complete for institutional filing without further merchant documents. It works whether Razorpay or its nodal bank files, and it does not mean approval.</li><li>Submission to confirmed filing (SOP limit for institutions: 7 calendar days).</li><li>Active time to submit, measured without autofill.</li><li>External outcomes (15-day decisions, release time) tracked against a baseline before attributing any change.</li><li>Guardrails: wrong AI extraction, mismatched payments, missed deadlines, duplicate filings, misleading status.</li></ul>
+    <h4>Not built</h4><p>Direct filing into police systems, refunds or unfreezing, a lawyer marketplace, chargebacks, generic KYC or risk-review tools.</p></div>`;
+}
+function railSources() {
+  const a = (u, t) => `<li><a href="${u}" target="_blank" rel="noopener">${t}</a></li>`;
+  return `<div class="pn"><h2>Sources</h2><h4>Razorpay app references (from the brief)</h4><ul>
+    ${a('https://play.google.com/store/apps/details?id=com.razorpay.payments.app', 'Play Store listing and screenshots')}${a('https://razorpay.com/docs/payments/mobile-app/', 'Mobile app documentation')}${a('https://razorpay.com/docs/payments/mobile-app/track-manage/view-settlements/', 'Settlements in the mobile app')}${a('https://razorpay.com/newsroom/brand-assets/', 'Brand assets')}${a('https://blade.razorpay.com/', 'Blade design system')}${a('https://github.com/razorpay/blade', 'Blade components')}${a('https://razorpay.com/razorsense/', 'RazorSense')}</ul>
+    <p class="fine">The settlements doc describes navigation as Transactions then Settlements, with Date and Status filters. The brief's baseline uses a Payments tab. Different app versions may differ; confirm against the current build and do not mix versions. Colours and type here are Razorpay-like approximations, not Blade tokens.</p>
+    <h4>Policy and cases</h4><ul>
+    ${a('https://meghalayahighcourt.nic.in/sites/default/files/news/N347.pdf', 'MHA SOP for NCRP-CFCFRMS, 2 Jan 2026 (Meghalaya HC copy)')}${a('https://cdnbbsr.s3waas.gov.in/s3ec0277ee3bc58ce560b86c2b59363281/uploads/2026/04/2026042314.pdf', 'Supreme Court proceedings, 9 Feb 2026')}${a('https://www.pib.gov.in/PressReleasePage.aspx?PRID=2290377&lang=1&reg=22', 'PIB: CFCFRMS 2.0, 28 Jul 2026')}${a('https://www.livelaw.in/pdf_upload/2026/07/06/1-2-684649.pdf', 'Sri Sai Wines v. Union of India, order of 22 Jun 2026')}${a('https://www.livelaw.in/high-court/andhra-pradesh-high-court/andhra-pradesh-high-court-vendors-verify-upi-customer-antecedents-540137', 'LiveLaw report on the case')}${a('https://telanganatoday.com/shopkeepers-pay-the-price-for-fraudsters-qr-payments-in-telangana', 'Telangana Today: shopkeepers and QR fraud')}${a('https://razorpay.com/blog/how-payment-gateways-handle-law-enforcement-agency-lea-hold-requests-in-india/', 'Razorpay: how gateways handle LEA hold requests (June 2026)')}</ul>
+    <h4>Alternatives</h4><ul>${a('https://www.cashfree.com/grievance-redressal-policy/', 'Cashfree grievance redressal policy')}${a('https://accountfreezenavigator.com/', 'Account Freeze Navigator')}</ul>
+    <p class="fine">All merchant, payer, police and reference details in the prototype are invented. Not a Razorpay product, not legal advice.</p></div>`;
+}
+function railAssume() {
+  return `<div class="pn"><h2>Assumptions requiring confirmation</h2><ul>
+    <li><b>Filing route.</b> Whether Razorpay files in the grievance module itself or through its nodal bank under the SOP's alternate arrangements. The SOP does not explicitly assign filing to Razorpay.</li>
+    <li><b>7-day filing target.</b> Applying the SOP's institution timeline to Razorpay.</li>
+    <li><b>Status visibility.</b> What grievance status Razorpay can see and share, and when it may notify merchants.</li>
+    <li><b>Incidence.</b> How often Razorpay merchants face police-linked holds, and how much delay comes from incomplete evidence rather than institutional handling.</li>
+    <li><b>Two minutes.</b> A target. Unproven without autofill, with missing evidence or several complaints.</li>
+    <li><b>OTP.</b> Whether OTP is enough, or a recognised e-signature is needed.</li>
+    <li><b>AI.</b> Approved vendor, data handling and retention for bill photos and text.</li>
+    <li><b>Hold context in Settlements.</b> Whether Razorpay can show per-payment hold context in the app when notices restrict disclosure.</li>
+    <li><b>Reasons.</b> Notice text, reasons and decision dates here are samples.</li></ul>
+    <h4>Scope</h4><p>Police-linked holds only. Risk reviews, KYC restrictions, reserves and card chargebacks have their own routes.</p></div>`;
+}
+function railMarket() {
+  return `<div class="pn"><h2>What exists today</h2><div class="cmp">
+    <div><b>Bank grievance desks</b>The SOP route for the institution holding funds. Merchants arrive without a prepared pack.</div>
+    <div><b>Cashfree grievance policy</b>Commits to collecting proof of good-faith provision when police alerts arrive, with tracking by email or dashboard (per its public policy).</div>
+    <div><b>Account Freeze Navigator</b>Advertises a ₹499 offer for fixed-format letters. We have not verified purchases or outcomes.</div>
+    <div><b>Lawyers</b>For contested holds.</div></div>
+    <p>Our angle is the combination: start from the hold, inside the payment app the merchant already uses, prefilled with payment records, with evidence preparation and institutional coordination. We found no public equivalent inside a payment app; private features or pilots cannot be ruled out.</p>
+    <p class="fine">Based on public pages only. Verify before quoting.</p></div>`;
+}
+function railLegend() { return ''; }
+function renderRail() {
+  const tabs = [['demo', 'Demo'], ['pitch', 'Pitch'], ['sources', 'Sources'], ['assume', 'Assumptions'], ['market', 'Market']];
+  const body = { demo: railDemo, pitch: railPitch, sources: railSources, assume: railAssume, market: railMarket }[S.rail]();
+  const r = $('#rail'); const st = r.scrollTop;
+  r.innerHTML = `<div class="rt" role="group" aria-label="Presenter panel">${tabs.map(([k, l]) => `<button data-act="rail" data-v="${k}" aria-pressed="${S.rail === k}">${l}</button>`).join('')}</div>${body}`;
+}
+setInterval(() => { const t = $('#tm'); if (t && S.t0 && !S.tEnd) t.textContent = mmss(Date.now() - S.t0); }, 500);
+
+/* ===== actions ===== */
+const ready = () => okEv('bill') && !!(S.expl || '').trim() && S.ack && !S.letterStale;
+function refreshSubmit() { const b = $('[data-act="confirmSubmit"]'); if (b) b.disabled = !ready(); }
+async function hiTranslate() {
+  const txt = (S.expl || '').trim(); S.hi.ask = false; S.hi.state = 'busy'; render(true);
+  let out = null, st = 'ai'; const ai = S.sim.aioff ? null : await getAI();
+  if (ai) { try { const r = await ai('Translate this short statement from an Indian shop owner into simple, natural Hindi (Devanagari). Keep every fact. Add nothing. Reply with only the translation.\n\n"' + txt + '"', { modelTier: 'quick' }); out = String(r && r.text || '').trim().replace(/^["“]+|["”]+$/g, '').trim() || null; } catch (e) { out = null; } }
+  if (!out) { if (txt === SAMPLE_WORDS_EN) { out = SAMPLE_WORDS_HI; st = 'sample'; } else { S.hi.state = 'error'; render(true); return; } }
+  S.hi = { src: txt, out, state: st, ask: false }; render(true);
+}
+async function doSubmit() {
+  if (S.sub === 'busy' || S.submitted) return;
+  S.sub = 'busy'; render(true);
+  await sleep(900);
+  if (S.sim.subfail) { S.sim.subfail = false; S.sub = 'fail'; S.sheet = null; render(true); return; }
+  S.sub = ''; S.submitted = true; S.cs = 1; S.tEnd = Date.now(); S.sheet = null; S.stack = ['confirm']; render();
+}
+function copyText(text, btn) {
+  const fallback = id => { const ta = document.getElementById(id); if (ta) { ta.focus(); ta.select(); } toast(L('Copy is blocked here. The text is selected: copy it from your keyboard.', 'यहाँ कॉपी बंद है। टेक्स्ट चुना हुआ है: कीबोर्ड से कॉपी करें।')); };
+  try { navigator.clipboard.writeText(text).then(() => toast(L('Copied', 'कॉपी हो गया')), () => fallback(btn)); } catch (e) { fallback(btn); }
+}
+async function helper(v) {
+  if (v === 'bill' || v === 'blur') { const a = await sampleAsset(v === 'blur' ? 'bill-blur' : 'bill'); await setEvidence('bill', a.url, a.blob, true); }
+  else if (v === 'hand' || v === 'chat') { const a = await sampleAsset(v); await setEvidence(v, a.url, a.blob, true); }
+  else if (v === 'imei') { S.imei = SAMPLE_IMEI; S.imeiFrom = 'sample'; markStale(); render(true); }
+  else if (v === 'words') { S.words = SAMPLE_WORDS; render(true); }
+  else if (v === 'resp') { const a = await sampleAsset('chat'); S.respDoc = { url: a.url }; render(true); }
+  else if (v === 'all') {
+    for (const k of ['bill', 'hand', 'chat']) { const a = await sampleAsset(k); await setEvidence(k, a.url, a.blob, true); }
+    S.imei = SAMPLE_IMEI; S.words = SAMPLE_WORDS; S.expl = SAMPLE_WORDS_EN; S.explSrc = 'sample';
+    S.bill = Object.assign({ notes: '' }, SAMPLE_BILL, { src: 'sample' }); S.billState = 'done'; markStale(); render(true);
+  }
+}
+function act(a, v, el) {
+  switch (a) {
+    case 'lang': S.lang = v; render(true); break;
+    case 'tab': setTab(v); break;
+    case 'back': back(); break;
+    case 'soon': toast(L('Not part of this prototype.', 'इस प्रोटोटाइप का हिस्सा नहीं।')); break;
+    case 'start': if (S.submitted) { go('track'); break; } if (!S.t0) { S.t0 = Date.now(); S.tEnd = 0; } go('hold'); break;
+    case 'viewHold': go('hold'); break;
+    case 'payOpen': go('payDetail'); break;
+    case 'track': go('track'); break;
+    case 'trackReplace': S.stack = ['track']; render(); break;
+    case 'toSupport': setTab('support'); break;
+    case 'toSettle': S.tab = 'payments'; S.pay = 'settlements'; S.stack = []; render(); break;
+    case 'seg': S.pay = v; render(); break;
+    case 'pf': S.pfilt = v; render(true); break;
+    case 'sf': S.sfilt = v; render(true); break;
+    case 'real': go('docs'); break;
+    case 'notmine': go('flag'); break;
+    case 'else': case 'contact': S.sheet = 'contact'; render(true); break;
+    case 'doFlag': S.flag = true; render(); break;
+    case 'grievances': go('grievances'); break;
+    case 'bankOpen': go('bank'); break;
+    case 'askBill': S.ask = 'bill'; render(true); break;
+    case 'readBill': readBill(); break;
+    case 'manualBill': manualBill(); break;
+    case 'askWords': if (!(S.words || '').trim()) { toast(L('Write a few lines first.', 'पहले कुछ पंक्तियाँ लिखें।')); break; } S.askW = '1'; render(true); break;
+    case 'cancelAsk': S.askW = ''; render(true); break;
+    case 'doWords': makeExplanation(); break;
+    case 'useWords': if (!(S.words || '').trim()) { toast(L('Write a few lines first.', 'पहले कुछ पंक्तियाँ लिखें।')); break; } S.expl = S.words.trim(); S.explSrc = 'own'; S.wordsState = ''; markStale(); render(true); break;
+    case 'rm': delete S.ev[v]; if (v === 'bill') { S.bill = null; S.billState = ''; S.ask = ''; } markStale(); render(true); break;
+    case 'retry': retryEv(v); break;
+    case 'saveDraft': S.draftAt = Date.now(); toast(L('Draft saved. Your documents and text stay if you change language or go back.', 'ड्राफ़्ट सेव हुआ। भाषा बदलने या पीछे जाने पर भी आपके दस्तावेज़ और टेक्स्ट रहेंगे।')); render(true); break;
+    case 'toSubmit': {
+      const it = S.ev.bill;
+      if (!okEv('bill') || (S.ev.hand && S.ev.hand.status === 'checking') || (S.ev.chat && S.ev.chat.status === 'checking')) { S.errMissing = true; render(true); const b = $('.body', app); if (b) b.scrollTop = 0; break; }
+      S.errMissing = false; go('submit'); break;
+    }
+    case 'resetLetter': S.letterEdited = false; S.letterStale = false; S.ack = false; render(true); break;
+    case 'okLetter': S.letterStale = false; S.ack = false; render(true); break;
+    case 'fixEncl': { const lines = enclosures().map((e, i) => `${i + 1}. ${e.l}`).join('\n'); const m = /(Enclosed:\n)([\s\S]*?)(\n\nI request)/.exec(S.letter); if (m) { S.letter = S.letter.replace(m[0], m[1] + lines + m[3]); S.letterStale = false; S.ack = false; } else toast(L('Could not find the enclosure list. Reset the letter or check it yourself.', 'संलग्नक सूची नहीं मिली। पत्र रीसेट करें या खुद जाँचें।')); render(true); break; }
+    case 'hiAsk': S.hi.ask = true; render(true); break;
+    case 'hiCancel': S.hi.ask = false; render(true); break;
+    case 'hiGo': hiTranslate(); break;
+    case 'confirmSubmit': if (!ready()) break; S.sheet = 'otp'; S.otp = ''; S.otpErr = ''; render(true); break;
+    case 'otpOk': if (S.otp !== H.otp) { S.otpErr = L('That code is not right. Try again.', 'यह कोड सही नहीं है। दोबारा कोशिश करें।'); render(true); break; } doSubmit(); break;
+    case 'closeSheet': S.sheet = null; render(true); break;
+    case 'pack': S.sheet = 'pack'; render(true); break;
+    case 'copyPack': copyText(($('#packTa') || {}).value || '', 'packTa'); break;
+    case 'copyBank': copyText(S.bankLetter, 'bankTa'); break;
+    case 'bankReset': S.bankEdited = false; render(true); break;
+    case 'reviewOpen': S.sheet = 'review'; render(true); break;
+    case 'reviewSend': { const c = cstate(); if (c.next && c.next.act === 'review') { S.cs++; S.sheet = null; render(true); } break; }
+    case 'respOpen': S.sheet = 'resp'; render(true); break;
+    case 'respSend': { const c = cstate(); if (c.next && c.next.act === 'respond' && S.respDoc) { S.cs++; S.sheet = null; S.respDoc = null; render(true); } break; }
+    case 'extRetry': if (S.sim.extna) toast(L('Still unavailable. Try again later.', 'अभी भी उपलब्ध नहीं। बाद में कोशिश करें।')); else render(true); break;
+    /* presenter */
+    case 'rail': S.rail = v; renderRail(); break;
+    case 'branch': S.branch = v; resetCase(); render(true); break;
+    case 'adv': { const m = advance(); render(true); const e = $('#advMsg'); if (m && e) e.textContent = m; break; }
+    case 'end': { let g = 0; while (g++ < 40) { const c = cstate(); if (!S.submitted || c.end || !c.next) break; if (c.next.act) { S.cs++; continue; } S.cs++; } render(true); break; }
+    case 'help': helper(v); break;
+    case 'sim': S.sim[v] = !S.sim[v]; renderRail(); if (cur() === 'track') render(true); break;
+    case 'ann': S.ann = !S.ann; render(true); break;
+    case 'noLogo': S.logo = ''; render(true); break;
+    case 'restart': { const keep = { lang: S.lang, ann: S.ann, logo: S.logo, rail: S.rail }; Object.keys(S).forEach(k => delete S[k]); Object.assign(S, initS(), keep); render(); break; }
+  }
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el || el.tagName === 'INPUT') return;
+  act(el.dataset.act, el.dataset.v, el);
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.tagName === 'INPUT' && el.type === 'checkbox' && el.dataset.act) {
+    if (el.dataset.act === 'ack') { S.ack = el.checked; refreshSubmit(); } else if (el.dataset.act === 'chk') S.chk[el.dataset.v] = el.checked;
+    return;
+  }
+  if (el.dataset && el.dataset.file) {
+    const k = el.dataset.file, f = el.files && el.files[0]; el.value = ''; if (!f) return;
+    if (k === 'logo') { const fr = new FileReader(); fr.onload = () => { S.logo = String(fr.result); render(true); }; fr.readAsDataURL(f); return; }
+    if (k === 'resp') { S.respDoc = { url: URL.createObjectURL(f) }; render(true); return; }
+    setEvidence(k, URL.createObjectURL(f), f, false); return;
+  }
+  if (el.dataset && el.dataset.in && el.dataset.in.startsWith('bill.')) render(true);
+});
+document.addEventListener('input', e => {
+  const el = e.target, p = el.dataset && el.dataset.in; if (!p) return;
+  const v = el.value;
+  if (p === 'imei') { S.imei = v.replace(/\D/g, '').slice(0, 15); S.imeiFrom = ''; const s = $('#imeiSt'); if (s) s.innerHTML = imeiHtml(); markStale(); }
+  else if (p.startsWith('bill.')) { const f = p.slice(5); if (!S.bill) return; S.bill[f] = f === 'total' ? (parseFloat(v.replace(/[^\d.]/g, '')) || null) : v; markStale(); }
+  else if (p === 'letter') { S.letter = v; S.letterEdited = true; S.letterStale = false; S.ack = false; const ck = $('input[data-act="ack"]'); if (ck) ck.checked = false; refreshSubmit(); }
+  else if (p === 'expl') { S.expl = v; if (S.explSrc !== 'own') S.explSrc = 'own'; markStale(); { const ck = $('input[data-act="ack"]'); if (ck) ck.checked = false; } if (!S.letterEdited) { const ta = $('#letterTa'); if (ta) ta.value = S.letter = buildLetter(); } refreshSubmit(); }
+  else if (p === 'bankLetter') { S.bankLetter = v; S.bankEdited = true; }
+  else S[p] = v;
+});
+render();
+})();
+</script>
+</body></html>
